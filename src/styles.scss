@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  line-height: 1.5;
+}
+ 
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1440x;
+  margin: 0 auto;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: "Lora", serif;
+}
+p, a {
+    font-family: "outfit", sans-serif;
+    font-size: 1rem;
+}

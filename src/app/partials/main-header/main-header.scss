@@ -1,0 +1,38 @@
+@use 'mixins' as *;
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F9F3E8;
+}
+
+img {
+    display: block;
+    padding: 1rem;
+    height: 100px;
+    width: auto;
+}
+
+nav {
+    padding-inline: 1.5rem;
+
+    ul {
+        display: inline-flex;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+
+
+        li {
+            list-style: none;
+
+            a {
+                @include nav-button;
+                  color: #000;
+                  padding: 12px 24px;
+                  border-radius: 8px;
+            }
+        }
+    }
+}
