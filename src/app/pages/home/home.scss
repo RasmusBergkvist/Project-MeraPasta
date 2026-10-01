@@ -1,4 +1,5 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 .hero-section {
     background-image: url(/spagetti.jpg);
@@ -18,7 +19,7 @@
     h1 {
         text-align: center;
         font-size: 4rem;
-        color: #fff;
+        color: $light-text;
 
         //Strecket mellan rubrik och text
         &::after {
@@ -35,7 +36,7 @@
 
     p {
         font-size: 1.5rem;
-        color: #fff;
+        color: $light-text;
     }
 
     .hero-btn {
@@ -50,12 +51,12 @@
             height: 50px;
             background-color: rgba(0, 0, 0, 0.4);
             border: 1px solid #fff;
-            color: #fff;
+            color: $light-text;
 
             transition: all 0.3s ease;
 
             &:hover {
-                background-color: #B83A2E;
+                background-color: $primary-component-color;
                 border: none;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             }

@@ -1,4 +1,6 @@
-//Navigering
+@use 'variables' as *;
+
+//Navigeringsknappar
 @mixin nav-button {
     display: inline-flex;
     align-items: center;
@@ -9,8 +11,8 @@
     transition: all 0.3s ease;
 
     &:hover {
-        background-color: #B83A2E;
-        color: #fff;
+        background-color: $primary-component-color;
+        color: $light-text;
         transform: translateY(-3px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }

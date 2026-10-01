@@ -1,10 +1,11 @@
 @use 'mixins' as *;
+@use 'variables' as *;
 
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #F9F3E8;
+    background-color: $primary-background;
 }
 
 img {
@@ -20,8 +21,6 @@ nav {
     ul {
         display: inline-flex;
         gap: 12px;
-        padding: 0;
-        margin: 0;
 
 
         li {
@@ -29,7 +28,7 @@ nav {
 
             a {
                 @include nav-button;
-                  color: #000;
+                  color: $dark-text;
                   padding: 12px 24px;
                   border-radius: 8px;
             }
