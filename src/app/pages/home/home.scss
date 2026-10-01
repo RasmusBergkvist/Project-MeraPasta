@@ -1,6 +1,7 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
+//HERO
 .hero-section {
     background-image: url(/spagetti.jpg);
     background-repeat: no-repeat;
@@ -41,12 +42,12 @@
 
     .hero-btn {
         display: inline-flex;
-         margin-top: 1.5rem;
+        margin-top: 1.5rem;
         gap: 2rem;
 
         a {
             @include nav-button;
-     
+
             width: 150px;
             height: 50px;
             background-color: rgba(0, 0, 0, 0.4);
@@ -66,6 +67,29 @@
         }
     }
 
+}
 
+//BANNER MED BILD OCH CITAT
+.banner {
+    background-image: url(/dinner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 50vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    blockquote {
+        color: $light-text;
+        font-size: 2.5rem;
+        font-style: italic;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.95);
+        text-align: center;
+        padding-inline: 10px;
+       
+    }
 
 }
