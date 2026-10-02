@@ -16,6 +16,26 @@
         transform: translateY(-3px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+}
+
+
+@mixin component-button {
+    display: inline-flex;
+    background-color: $primary-component-color;
+    font-size: 1rem;
+    padding: 12px 24px;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {  
+        color: $light-text;
+        transform: translateY(-3px);
+      
+    }
 
 
 

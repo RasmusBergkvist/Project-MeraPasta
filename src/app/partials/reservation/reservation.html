@@ -1,3 +1,44 @@
-<section id="reservation">
-<p>reservation works!</p>
+<section id="reservation" class="reservation-section">
+    <h2>Boka bord</h2>
+    <p>Fyll i formuläret för att så återkommer till dig så fort vi kan med en bokningsbekräftelse.
+    </p>
+    
+    <form>
+        <label for="name">
+            <input type="text" id="name" name="name">
+            <span class="input-span">Namn</span>
+        </label>
+
+        <label for="email">
+            <input type="email" id="email" name="email">
+            <span class="input-span">E-post</span>
+        </label>
+
+        <label for="phone"> 
+            <input type="tel" id="phone" name="phone">
+            <span class="input-span">Telefon</span>
+        </label>
+
+        <div class="reservation-details">
+            <label for="date">Datum
+                <input type="date" id="date" name="date">
+            </label>
+
+            <label for="time">Tid
+                <input type="time" id="id" name="time">
+            </label>
+
+            <label for="guests">Antal gäster
+                <input type="number" id="guests" name="guests">
+            </label>
+        </div>
+
+        <label>
+        <textarea name="reservation-message" id="reservation-message"></textarea>
+        <span class="input-span">Meddelande</span>
+        </label>
+
+        <button type="sumbit" class="reservation-btn">Skicka bokning</button>
+
+    </form>
 </section>
