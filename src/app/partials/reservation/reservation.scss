@@ -7,21 +7,20 @@
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    padding-block: 20px;
-    background-color: #EDE3D0;
+    padding-block: 2rem;
+    background-color: $primary-background-darker;
     gap: 6px;
 
 
     h2 {
         text-align: center;
-        font-size: 40px;
-        font-weight: 400;
+  
 
         &::after {
             content: '';
             display: block;
             width: min(400px, 50vw);
-            height: 2px;
+            height: 1.5px;
             margin: 5px auto;
             border-radius: 1px;
             background-color: #7A6A55;

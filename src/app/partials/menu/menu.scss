@@ -9,10 +9,6 @@
     padding: 20px;
     background-color: $primary-background;
 
-    h2 {
-        font-size: 40px;
-        font-weight: 400;
-    }
 }
 
 //Menynavigering
@@ -26,6 +22,10 @@
     ul {
         display: flex;
         gap: 100px;
+
+        @media(max-width: 768px) {
+            gap: 40px;
+        }
 
 
         li {
@@ -53,7 +53,7 @@
         content: '';
         display: block;
         width: min(800px, 80vw);
-        height: 1px;
+        height: 1.5px;
         margin: 5px auto;
         border-radius: 1px;
         background-color: #7A6A55;
