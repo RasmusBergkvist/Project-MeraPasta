@@ -1,0 +1,95 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+//Komponentlayout och design: Footer
+footer {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    width: 100%;
+    padding-block: 2rem;
+    background-color: $footer-background;
+    color: $light-text;
+
+    //Mobiler
+    @media(max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 30px;
+
+    }
+}
+
+
+address {
+
+    font-style: normal;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+
+.socialmedia {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h4 {
+        margin-bottom: 8px;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 12px;
+
+
+
+        .social-links {
+            display: inline-block;
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            &:hover {
+                transform: translateY(-3px);
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+            }
+
+        }
+
+    }
+
+}
+
+.staff {
+    display: block;
+
+    h3 {
+        margin-bottom: 8px;
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        border: 1px solid white;
+        color: $light-text;
+        padding: 5px 10px;
+        transition: all 0.2s ease;
+
+        &:hover {
+             transform: translateY(-3px);
+            background-color: $primary-background;
+            color: $footer-background;
+
+        }
+    
+    }
+}
