@@ -1,46 +1,87 @@
 <section id="menu" class="menu-section">
     <h2>Meny</h2>
+
+    <!-- Felmeddelande-->
+    @if(error()) {
+    <div class="error">
+        <p class="error-text">{{error()}}</p>
+    </div>
+    }
+
+
     <nav class="menu-nav">
         <ul>
-            <li><a>Pastarätter</a></li>
-            <li><a>Barnmeny</a></li>
-            <li><a>Dryck</a></li>
+            @for(category of categoryService.categories(); track category.category_id) {
+            <li>
+                <a (click)="changeCategory(category.category_id)" 
+                [class.active]="category.category_id === selectedCateory()">{{category.category_name}}</a>
+            </li>
+
+            <!-- Om inga menyer finns -->
+            } @empty {
+            @if(!error()) {
+            <li>Det finns inga sparade menyer.</li>
+            }
+            }
         </ul>
     </nav>
     <div class="menu-container">
 
-        <!-- PLACEHOLDER MENYER-->
-        <article class="item-card">
-            <div class="item-details">
-                <h3 item-name>Spaghetti Bolognese</h3>
-                <span class="item-price">129 kr</span>
-            </div>
-            <p class="item-description">Klassisk köttfärssås med parmesanost och färsk basilika.</p>
+            @for(item of menuItemService.menuItems(); track item.item_id)
+            {
+            <article class="item-card">
+                <div class="item-details">
+                    <h3 class="item-name">{{item.item_name}}</h3>
+                    <span class="item-price">{{item.item_price}} kr</span>
+                </div>
+                @if(item.item_description) {
+                <p class="item-description">{{item.item_description}}.</p>
+                }
+            </article>
 
-        </article>
-        <article class="item-card">
-            <div class="item-details">
-                <h3 item-name>Penne all'Arrabbiata</h3>
-                <span class="item-price">139 kr</span>
-            </div>
-            <p class="item-description">Pasta i en het tomatsås med vitlök och chili.</p>
-        </article>
+            } @empty {
+            @if(!error()) {
+            <p class="menu-error">Det finns inga maträtter sparade till denna menyn.</p>
 
-        <article class="item-card">
-            <div class="item-details">
-                <h3 item-name>Linguine ai Frutti di Mare</h3>
-                <span class="item-price">159 kr</span>
-            </div>
-            <p class="item-description">Klassisk skaldjurspasta med musslor, räkor och bläckfisk 
-i tomatsås med vitt vin, vitlök och chili.</p>
-        </article>
+            }
+            }
 
-             <article class="item-card">
-            <div class="item-details">
-                <h3 item-name>Ravioli di Ricotta e Spinaci</h3>
-                <span class="item-price">139 kr</span>
-            </div>
-            <p class="item-description">Pasta fylld med ricotta och spenat, serverad i en  tomatsås eller med salviasmör och parmesan..</p>
-        </article>
+            <!-- PLACEHOLDER MENYER
+            <article class="item-card">
+                <div class="item-details">
+                    <h3 class="item-name">Spaghetti Bolognese</h3>
+                    <span class="item-price">129 kr</span>
+                </div>
+                <p class="item-description">Klassisk köttfärssås med parmesanost och färsk basilika.</p>
+
+            </article>
+            <article class="item-card">
+                <div class="item-details">
+                    <h3 class="item-name">Penne all'Arrabbiata</h3>
+                    <span class="item-price">139 kr</span>
+                </div>
+                <p class="item-description">Pasta i en het tomatsås med vitlök och chili.</p>
+            </article>
+
+            <article class="item-card">
+                <div class="item-details">
+                    <h3 class="item-name">Linguine ai Frutti di Mare</h3>
+                    <span class="item-price">159 kr</span>
+                </div>
+                <p class="item-description">Klassisk skaldjurspasta med musslor, räkor och bläckfisk
+                    i tomatsås med vitt vin, vitlök och chili.</p>
+            </article>
+
+            <article class="item-card">
+                <div class="item-details">
+                    <h3 class="item-name">Ravioli di Ricotta e Spinaci</h3>
+                    <span class="item-price">139 kr</span>
+                </div>
+                <p class="item-description">Pasta fylld med ricotta och spenat, serverad i en tomatsås eller med
+                    salviasmör
+                    och parmesan.</p>
+            </article>
+            -->
+   
     </div>
 </section>
