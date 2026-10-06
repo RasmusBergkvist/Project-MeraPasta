@@ -2,43 +2,94 @@
     <h2>Boka bord</h2>
     <p>Fyll i formuläret för att så återkommer till dig så fort vi kan med en bokningsbekräftelse.
     </p>
-    
-    <form>
+
+    <!-- Vid lyckad bokningförfrågan -->
+    @if(success()) {
+    <p class="success-text">{{success()}}</p>
+    }
+    <!-- Felmeddelande -->
+    @if(error()) {
+    <p class="error-text">{{error()}}</p>
+    }
+
+    <!-- FOMRMULÄR TILL BOKNINGSFÖRFRÅGAN -->
+    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
         <label for="name">
-            <input type="text" id="name" name="name">
-            <span class="input-span">Namn</span>
+            <input type="text" id="name" formControlName="customer_name">
+
+            <span class="input-span"
+                [class.has-value]="reservationForm.controls['customer_name'].value !==''">Namn</span>
+
+            @if(reservationForm.controls["customer_name"].invalid && reservationForm.controls["customer_name"].touched)
+            {
+            <p class="error">Namn måste bestå av två bokstäver</p>
+            }
         </label>
 
         <label for="email">
-            <input type="email" id="email" name="email">
-            <span class="input-span">E-post</span>
+            <input type="email" id="email" formControlName="customer_email">
+            <span class="input-span"
+                [class.has-value]="reservationForm.controls['customer_email'].value !==''">E-post</span>
+            @if(reservationForm.controls["customer_email"].invalid &&
+            reservationForm.controls["customer_email"].touched)
+            {
+            <p class="error">Ange en giltig e-postadress.</p>
+            }
         </label>
 
-        <label for="phone"> 
-            <input type="tel" id="phone" name="phone">
-            <span class="input-span">Telefon</span>
+        <label for="phone">
+            <input type="tel" id="phone" formControlName="customer_phonenumber">
+            <span class="input-span"
+                [class.has-value]="reservationForm.controls['customer_phonenumber'].value !==''">Telefon</span>
+            @if(reservationForm.controls["customer_phonenumber"].invalid &&
+            reservationForm.controls["customer_phonenumber"].touched)
+            {
+            <p class="error">Ange ett giltigt telefonnummer (7 - 15 siffror).</p>
+            }
         </label>
 
         <div class="reservation-details">
             <label for="date">Datum
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" formControlName="reservation_date">
+
             </label>
 
             <label for="time">Tid
-                <input type="time" id="id" name="time">
+                <input type="time" id="time" formControlName="reservation_time">
             </label>
 
             <label for="guests">Antal gäster
-                <input type="number" id="guests" name="guests">
+                <input type="number" id="guests" formControlName="guests" min="1" max="10">
             </label>
         </div>
 
-        <label>
-        <textarea name="reservation-message" id="reservation-message"></textarea>
-        <span class="input-span">Meddelande</span>
+        <div class="error-details">
+            @if(reservationForm.controls["reservation_date"].invalid &&
+            reservationForm.controls["reservation_date"].touched)
+            {
+            <p class="error">Välj ett datum till din bokning.</p>
+            }
+
+            @if(reservationForm.controls["guests"].invalid &&
+            reservationForm.controls["guests"].touched)
+            {
+            <p class="error">Vänligen ange antal gäster mellan 1 - 10 st.</p>
+            }
+
+            @if(reservationForm.controls["reservation_time"].invalid &&
+            reservationForm.controls["reservation_time"].touched)
+            {
+            <p class="error">Välj en tid till din bokning.</p>
+            }
+        </div>
+
+        <label for="message">
+            <textarea id="message" formControlName="message"></textarea>
+            <span class="input-span"
+                [class.has-value]="reservationForm.controls['message'].value !==''">Meddelande</span>
         </label>
 
-        <button type="sumbit" class="reservation-btn">Skicka bokning</button>
+        <button type="submit" class="reservation-btn" [disabled]="reservationForm.invalid">Skicka bokning</button>
 
     </form>
 </section>
