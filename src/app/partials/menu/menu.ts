@@ -15,7 +15,7 @@ export class Menu {
   error = signal<string | null>(null);
 
 //Signal till vald kategori 
-selectedCateory = signal<number | null>(null);
+selectedCategory = signal<number | null>(null);
 
 //Läser in services
 categoryService = inject(CategoryService);
@@ -38,7 +38,7 @@ async ngOnInit() {
     const firstIndex = categoryList[0].category_id;
 
     //Ändrar till första index och laddar menyartiklarna som tillhör kategorin.
-    this.selectedCateory.set(firstIndex);
+    this.selectedCategory.set(firstIndex);
     this.menuItemService.loadMenuCategory(firstIndex);
 
   }
@@ -51,7 +51,7 @@ async ngOnInit() {
 
 //Ändra kategori med tillhörande meynartiklar.
 changeCategory(id: number) {
-  this.selectedCateory.set(id);
+  this.selectedCategory.set(id);
   this.menuItemService.loadMenuCategory(id);
 }
 

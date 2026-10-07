@@ -8,13 +8,13 @@
     </div>
     }
 
-
+     <!-- Menykategorier-->
     <nav class="menu-nav">
         <ul>
             @for(category of categoryService.categories(); track category.category_id) {
             <li>
                 <a (click)="changeCategory(category.category_id)" 
-                [class.active]="category.category_id === selectedCateory()">{{category.category_name}}</a>
+                [class.active]="category.category_id === selectedCategory()">{{category.category_name}}</a>
             </li>
 
             <!-- Om inga menyer finns -->
@@ -25,6 +25,8 @@
             }
         </ul>
     </nav>
+
+       <!-- Menyartiklar-->
     <div class="menu-container">
 
             @for(item of menuItemService.menuItems(); track item.item_id)
@@ -34,14 +36,16 @@
                     <h3 class="item-name">{{item.item_name}}</h3>
                     <span class="item-price">{{item.item_price}} kr</span>
                 </div>
+                 <!-- Om det finns en beskrivning till artikeln -->
                 @if(item.item_description) {
                 <p class="item-description">{{item.item_description}}.</p>
                 }
             </article>
 
+            <!-- Om det inte finns några artiklar till menyn -->
             } @empty {
-            @if(!error()) {
-            <p class="menu-error">Det finns inga maträtter sparade till denna menyn.</p>
+            @if(!error() && selectedCategory()) {
+            <p class="menu-empty">Det finns inga maträtter sparade till denna menyn.</p>
 
             }
             }

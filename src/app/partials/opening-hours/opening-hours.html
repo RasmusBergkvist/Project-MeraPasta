@@ -1,9 +1,40 @@
 <section id="opening-hours" class="opening-hours-section">
     <h2>Våra öppettider</h2>
 
+    <!-- Felmeddelande-->
+    @if(error()) {
+        <p class="error">{{error()}}</p>
+    }
 
-    <!-- PLACEHOLDER FÖR ÖPPETTIDER-->
+
+  
     <ul class="opening-hours-list">
+
+    @for(hour of openingHoursService.openingHours(); track hour.open_id) {
+        <li>
+            <span>{{hour.day_of_week}}</span>
+               @if(hour.open_time === null || hour.open_time === "") {
+                <span>Stängt</span>
+               }@else {
+            <span>{{hour.open_time}} -  {{hour.close_time}}</span>
+            }
+        </li>
+
+    } @empty {
+        @if(!error()) {
+            <p>Det finns inga öppettider tillgängliga.</p>
+        }
+    }
+     </ul>
+
+      <article>
+        <h3>Röda dagar & storhelger</h3>
+        <p>Vi håller helt stängt under jul-, nyårs-, påsk- och midsommarhelgen. Övriga röda dagar har vi öppet som
+            vanligt enligt våra söndagstider.</p>
+    </article>
+</section>
+
+          <!-- PLACEHOLDER FÖR ÖPPETTIDER
         <li>
             <span class="day">Måndag:</span>
             <span class="time">11.30 - 19:00</span>
@@ -33,11 +64,7 @@
             <span class="time">12:00 - 18:00</span>
         </li>
 
-    </ul>
+   
+    -->
 
-    <article>
-        <h3>Röda dagar & storhelger</h3>
-        <p>Vi håller helt stängt under jul-, nyårs-, påsk- och midsommarhelgen. Övriga röda dagar har vi öppet som
-            vanligt enligt våra söndagstider.</p>
-    </article>
-</section>
+  

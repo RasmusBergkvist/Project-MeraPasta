@@ -49,7 +49,6 @@
                     text-decoration: underline;
 
                 }
-
             }
         }
     }
@@ -79,7 +78,7 @@
     max-width: 900px;
     width: 100%;
 
-    .menu-error {
+    .menu-empty {
         grid-column: 1/-1; //Tar upp hela raden.
         margin: 0 auto;
         text-align: center;

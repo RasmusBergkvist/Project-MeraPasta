@@ -1,4 +1,4 @@
-
+@use 'variables'as *;
 
 * {
     margin: 0;
@@ -45,6 +45,9 @@ p {
   max-width: 60ch;
 }
 
-span {
+span, li {
   font-family: "outfit", sans-serif;
+}
+.error {
+color: $primary-component-color;
 }
