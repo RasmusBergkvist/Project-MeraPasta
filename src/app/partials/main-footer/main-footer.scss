@@ -76,16 +76,21 @@ address {
         margin-bottom: 8px;
     }
 
-    a {
+    .logout-btn {
+        background-color: transparent;
+    }
+
+    a, .logout-btn {
         display: inline-block;
         text-decoration: none;
         border: 1px solid white;
         color: $light-text;
         padding: 5px 10px;
         transition: all 0.2s ease;
+        cursor: pointer;
 
         &:hover {
-             transform: translateY(-3px);
+            transform: translateY(-3px);
             background-color: $primary-background;
             color: $footer-background;
 

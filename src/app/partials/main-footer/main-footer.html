@@ -45,5 +45,10 @@
 
         <div class="staff">
             <h3>Personal</h3>
+            <!-- Ändras beroende på om användaren är inloggade eller inte-->
+            @if(!authService.isLoggedIn()) {
             <a routerLink="/login" fragment="login">Logga in</a>
+               } @else {
+                    <button (click)="onLogout()" class="logout-btn">Logga ut</button>
+                }
         </div>

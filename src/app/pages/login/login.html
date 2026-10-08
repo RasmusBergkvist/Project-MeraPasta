@@ -1,3 +1,39 @@
-<section id="login">
-<p>login works!</p>
+<section id="login" class="login-section">
+
+    <h2>Logga in</h2>
+    <p>Här kan du som personal logga in för att uppdatera webbplatsen.</p>
+
+    @if(error()){
+    <p class="error">{{error()}}</p>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+        <label for="email">
+            <input type="email" id="email" formControlName="email">
+            <span class="input-span"
+                [class.has-value]="loginForm.controls['email'].value !==''">E-post</span>
+            @if(loginForm.controls["email"].invalid &&
+            loginForm.controls["email"].touched)
+            {
+            <p class="error">Ange en giltig e-postadress.</p>
+            }
+        </label>
+
+        <label for="password">
+            <input type="password" id="password" formControlName="password">
+            <span class="input-span" [class.has-value]="loginForm.controls['password'].value !==''">Lösenord</span>
+            @if(loginForm.controls["password"].invalid &&
+            loginForm.controls["password"].touched)
+            {
+            <p class="error">Ange lösenord.</p>
+            }
+        </label>
+
+        <button type="submit" class="login-btn" [disabled]="loginForm.invalid">Logga in</button>
+
+
+
+    </form>
+
 </section>

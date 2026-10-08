@@ -14,8 +14,8 @@ import { firstValueFrom } from 'rxjs';
 export class ReservationComponent {
 
   //Signals: meddelande vid bokningförfrågan
-  error = signal<string | null>(null);
-  success = signal<string | null>(null);
+  error = signal<string>("");
+  success = signal<string>("");
 
   //Läser in service
   reservationService = inject(ReservationService);
@@ -34,8 +34,8 @@ export class ReservationComponent {
   //Skicka bokningsförfrågan
   async onSubmit() {
     //Rensar tidigare meddelanden
-    this.success.set(null);
-    this.error.set(null);
+    this.success.set("");
+    this.error.set("");
 
     //Om formuläret inte är korrekt ifyllt. 
     if (this.reservationForm.invalid) {
@@ -54,7 +54,7 @@ export class ReservationComponent {
 
       //Meddelandent nollställs efter 5 sekunder.
       setTimeout(() => {
-        this.success.set(null)
+        this.success.set("")
       }, 5000);
 
       //Rensar formuläret
