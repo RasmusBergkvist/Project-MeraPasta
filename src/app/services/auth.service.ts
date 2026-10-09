@@ -53,7 +53,7 @@ export class AuthService {
         this.currentUserRole.set("");
 
         //Omdirigerar till startsidan.
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/"]);
 
 
     }

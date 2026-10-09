@@ -9,7 +9,7 @@ export class CategoryService {
 
     http = inject(HttpClient);
 
-    //Singal 
+    //Signal 
     categories = signal<Category[]>([]);
 
     //Hämta kategorier

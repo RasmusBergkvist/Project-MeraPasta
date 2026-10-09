@@ -1,0 +1,111 @@
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.interface';
+
+@Component({
+  imports: [ReactiveFormsModule],
+  selector: 'app-users',
+  styleUrl: './users.scss',
+  templateUrl: './users.html',
+})
+export class Users {
+  //Signal: meddelande vid skapa eller radera användare. 
+  errorCreate = signal<string>("");
+  successCreate = signal<string>("");
+  errorDelete = signal<string>("");
+  successDelete = signal<string>("");
+
+  //Hämtar service och router
+  userService = inject(UserService);
+
+  //Validering
+  registerForm = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    role: new FormControl('', [Validators.required])
+  });
+
+  async onSubmit() {
+    //Om inte login-fält är korrekt ifyllt.
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+
+    try {
+      //Rensar tidigare meddelanden
+      this.successCreate.set("");
+      this.errorDelete.set("");
+
+      //Hämtar värden från login-formulär enligt interface
+      const registerInput = this.registerForm.value as User;
+
+      //Skickar inloggningsuppgifter
+      await this.userService.registerUser(registerInput);
+
+      //Återställer formuläret
+      this.registerForm.reset();
+
+      //Meddelande vid lyckad bokning.
+      this.successCreate.set(`Användare skapad för ${registerInput.username}`)
+
+      //Meddelandent nollställs efter 5 sekunder.
+      setTimeout(() => {
+        this.successCreate.set("")
+      }, 5000);
+
+    } catch (error: any) {
+      //Om användaren redan finns.
+      if (error.status === 409) {
+        this.errorCreate.set("Användaren finns redan!");
+      } else {
+        this.errorCreate.set("Det gick inte att skapa användaren. Försök igen senare.")
+      }
+
+      //Meddelandent nollställs efter 5 sekunder.
+      setTimeout(() => {
+        this.errorCreate.set("")
+      }, 5000);
+
+
+    }
+  }
+
+  //vid start
+  async ngOnInit() {
+    await this.userService.loadUsers();
+
+  }
+
+  //Radera användare
+  async onDelete(userId: number, username: string): Promise<void> {
+    try {
+    await this.userService.deleteUser(userId);
+
+    //Meddelande vid radering
+    this.successDelete.set(`Användaren har raderats: ${username}`);
+
+    //Meddelandent nollställs efter 5 sekunder.
+    setTimeout(() => {
+      this.successDelete.set("")
+    }, 5000);
+
+  }catch(error: any) {
+      //Om användaren redan finns.
+      if (error.status === 400) {
+        this.errorDelete.set("Det måste finnas minst en administratör!");
+      } else {
+        this.errorDelete.set("Det gick inte att radera användaren Försök igen senare.")
+      }
+
+      //Meddelandent nollställs efter 5 sekunder.
+      setTimeout(() => {
+        this.errorDelete.set("")
+      }, 5000);
+
+
+    }
+  }
+}

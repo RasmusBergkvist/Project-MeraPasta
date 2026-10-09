@@ -20,6 +20,10 @@ img {
     width: auto;
 }
 
+a {
+    cursor: pointer;
+}
+
 nav {
     padding-inline: 1.5rem;
 
@@ -33,9 +37,9 @@ nav {
 
             a {
                 @include nav-button;
-                  color: $dark-text;
-                  padding: 12px 24px;
-                  border-radius: 8px;
+                color: $dark-text;
+                padding: 12px 24px;
+                border-radius: 8px;
             }
         }
     }

@@ -1,0 +1,190 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+//Övergripande design och layout av komponent
+.manage-users {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding-inline: 1rem;
+    padding-top: 150px;
+    padding-bottom: 60px;
+    background-color: $primary-background;
+
+
+
+    h2 {
+        text-align: center;
+
+
+        &::after {
+            content: '';
+            display: block;
+            width: min(400px, 50vw);
+            height: 1.5px;
+            margin: 5px auto;
+            border-radius: 1px;
+            background-color: #7A6A55;
+        }
+
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .success-text {
+        color: rgb(54, 90, 54);
+    }
+
+    .error-text {
+
+        color: $primary-component-color;
+    }
+
+}
+
+
+//Formulär
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    width: 100%;
+    gap: 20px;
+    background-color: $primary-background-darker;
+    border: 1px solid $secondary-component-color;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+
+    legend {
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    label {
+        position: relative;
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            background-color: $item-color;
+            border: 1px solid $secondary-component-color;
+            padding: 16px 12px 10px 12px;
+            width: 100%;
+            font-size: 1rem;
+            outline: none;
+            transition: outline 0.2s ease;
+
+            &:focus {
+                outline: 1px solid $secondary-component-color;
+
+                //När användaren klickar i fältet.
+                &+span {
+                    top: 0;
+                    font-size: 12px;
+                    color: $secondary-component-color;
+                }
+            }
+        }
+
+        span {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            transition: all 0.2s ease;
+
+            //När värde finns i fäletet
+            &.has-value {
+                top: 0;
+                font-size: 12px;
+                color: $secondary-component-color;
+            }
+        }
+    }
+
+
+    select {
+        border: 1px solid $secondary-component-color;
+        padding: 10px 6px;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+
+    .error {
+        text-align: left;
+
+    }
+
+
+    .register-btn {
+        @include component-button;
+        color: $light-text;
+
+        &:hover {
+            background-color: $darker-primary-component-color;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed; //Ändrar symbol om inte obligatorisk fält är ifyllda.
+        }
+
+
+    }
+}
+
+//Användarlista
+.user-list {
+    list-style: none;
+    width: 100%;
+    max-width: 350px;
+    padding: 12px;
+    margin-block: 1.5rem;
+    background-color: $item-color;
+    border: 1px solid $secondary-component-color;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+
+    h3 {
+        font-family: "outfit", sans-serif;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid $secondary-component-color;
+        padding: 16px 10px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .username {
+            text-transform: capitalize;
+        }
+
+        .delete-btn {
+            @include component-button;
+            padding: 6px 12px;
+            color: $light-text;
+            font-size: 14px;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: $darker-primary-component-color;
+
+            }
+
+        }
+    }
+}

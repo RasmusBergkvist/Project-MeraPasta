@@ -1,0 +1,90 @@
+<section id="users" class="manage-users">
+    <h2>Hantera användare</h2>
+    <p>Här kan du skapa och radera användare.</p>
+
+        <!-- När användare skapas -->
+    @if(successCreate()) {
+    <p class="success-text">{{successCreate()}}</p>
+    }
+    <!-- Felmeddelande vid skapa användare -->
+    @if(errorCreate()) {
+    <p class="error-text">{{errorCreate()}}</p>
+    }
+
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+        <legend>Skapa användare</legend>
+
+        <label for="username">
+            <input type="text" id="username" formControlName="username">
+            <span class="input-span" [class.has-value]="registerForm.controls['username'].value !==''">Namn</span>
+            @if(registerForm.controls["username"].invalid &&
+            registerForm.controls["username"].touched)
+            {
+            <p class="error">Namn måste bestå av minst 2 bokstäver.</p>
+            }
+        </label>
+
+
+        <label for="email">
+            <input type="email" id="email" formControlName="email">
+            <span class="input-span" [class.has-value]="registerForm.controls['email'].value !==''">E-post</span>
+            @if(registerForm.controls["email"].invalid &&
+            registerForm.controls["email"].touched)
+            {
+            <p class="error">Ange en giltig e-postadress. </p>
+            }
+        </label>
+
+
+        <label for="password">
+            <input type="password" id="password" formControlName="password">
+            <span class="input-span" [class.has-value]="registerForm.controls['password'].value !==''">Lösenord</span>
+            @if(registerForm.controls["password"].invalid &&
+            registerForm.controls["password"].touched)
+            {
+            <p class="error">Ange lösenord med minst 6 tecken.</p>
+            }
+        </label>
+
+        <label for="role">Behörighet
+            <select id="role" formControlName="role">
+                <option value="" disabled selected>Välj en roll</option>
+                <option value="staff">Personal</option>
+                <option value="admin">Administratör</option>
+            </select>
+        </label>
+
+
+        <button type="submit" class="register-btn" [disabled]="registerForm.invalid">Skapa användare</button>
+    </form>
+
+    <!-- När användare raderas -->
+    @if(successDelete()) {
+    <p class="success-text">{{successDelete()}}</p>
+    }
+    <!-- Felmeddelande vid raderad användare -->
+    @if(errorDelete()) {
+    <p class="error-text">{{errorDelete()}}</p>
+    }
+
+    <section class="user-list">
+        <h3>Alla användare</h3>
+
+        <ul>
+
+            @for(user of userService.users(); track user.user_id) {
+
+            <li>
+                <span class="username">{{user.username}}</span>
+                <span>{{user.role === "admin" ? "Administratör" : "Personal"}}</span>
+                <button type="button" (click)="onDelete(user.user_id, user.username)" class="delete-btn">Radera</button>
+            </li>
+
+
+            }
+        </ul>
+
+    </section>
+
+</section>

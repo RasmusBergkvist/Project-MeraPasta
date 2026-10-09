@@ -1,9 +1,9 @@
-@use 'variables'as *;
+@use 'variables' as *;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -14,7 +14,7 @@ body {
   height: 100%;
   line-height: 1.5;
 }
- 
+
 
 
 .container {
@@ -24,30 +24,41 @@ body {
   width: 100%;
   max-width: 1440x;
   margin: 0 auto;
+  padding-top: 80px;
 }
 
 
-h1, h2, h3, h4, blockquote {
-    font-family: "Lora", serif;
+h1,
+h2,
+h3,
+h4,
+blockquote {
+  font-family: "Lora", serif;
 }
 
 h2 {
-      font-size: 40px;
-        font-weight: 400;
+  font-size: 40px;
+  font-weight: 400;
 }
 
-p, a, label, button {
-    font-family: "outfit", sans-serif;
-    font-size: 1rem;
+p,
+a,
+label,
+button {
+  font-family: "outfit", sans-serif;
+  font-size: 1rem;
 }
 
 p {
   max-width: 60ch;
 }
 
-span, li {
+span,
+li,
+legend {
   font-family: "outfit", sans-serif;
 }
+
 .error {
-color: $primary-component-color;
+  color: $primary-component-color;
 }
