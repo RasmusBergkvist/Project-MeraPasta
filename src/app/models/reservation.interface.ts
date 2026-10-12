@@ -7,5 +7,6 @@ export interface Reservation {
     reservation_date: string,
     reservation_time: string,
     message?: string
+    original_date?: string
 
 }

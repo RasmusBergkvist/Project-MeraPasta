@@ -1,0 +1,153 @@
+<section id="manage-reservation" class="manage-reservation">
+    <h2>Hantera bokningar</h2>
+    <p>Här kan du se och hantera inkomna bokningar.</p>
+
+    <!-- Felmeddelande -->
+    @if(error()) {
+    <p class="error">{{error()}}</p>
+    }
+
+    @if(success()) {
+    <p class="success-text">{{success()}}</p>
+    }
+
+
+    <!-- Visas bara vid redigering -->
+    <div class="edit-form" [class.visible]="editId() !== null" [class.hidden]="editId() === null">
+
+        <!-- Formulär vid redigera bokning-->
+        <form [formGroup]="editReservationForm" (ngSubmit)="onSubmit()">
+            <legend>Ändra bokning</legend>
+            <label for="name">
+                <input type="text" id="name" formControlName="customer_name">
+
+                <span class="input-span"
+                    [class.has-value]="editReservationForm.controls['customer_name'].value !==''">Namn</span>
+
+                @if(editReservationForm.controls["customer_name"].invalid &&
+                editReservationForm.controls["customer_name"].touched)
+                {
+                <p class="error">Namn måste bestå av två bokstäver</p>
+                }
+            </label>
+
+            <label for="email">
+                <input type="email" id="email" formControlName="customer_email">
+                <span class="input-span"
+                    [class.has-value]="editReservationForm.controls['customer_email'].value !==''">E-post</span>
+                @if(editReservationForm.controls["customer_email"].invalid &&
+                editReservationForm.controls["customer_email"].touched)
+                {
+                <p class="error">Ange en giltig e-postadress.</p>
+                }
+            </label>
+
+            <label for="phone">
+                <input type="tel" id="phone" formControlName="customer_phonenumber">
+                <span class="input-span"
+                    [class.has-value]="editReservationForm.controls['customer_phonenumber'].value !==''">Telefon</span>
+                @if(editReservationForm.controls["customer_phonenumber"].invalid &&
+                editReservationForm.controls["customer_phonenumber"].touched)
+                {
+                <p class="error">Ange ett giltigt telefonnummer (7 - 15 siffror).</p>
+                }
+            </label>
+
+            <div class="reservation-details">
+                <label for="date">Datum
+                    <input type="date" id="date" formControlName="reservation_date">
+
+                </label>
+
+                <label for="time">Tid
+                    <input type="time" id="time" formControlName="reservation_time">
+                </label>
+
+                <label for="guests">Antal gäster
+                    <input type="number" id="guests" formControlName="guests" min="1" max="10">
+                </label>
+            </div>
+
+            <div class="error-details">
+                @if(editReservationForm.controls["reservation_date"].invalid &&
+                editReservationForm.controls["reservation_date"].touched)
+                {
+                <p class="error">Välj ett datum till din bokning.</p>
+                }
+
+                @if(editReservationForm.controls["guests"].invalid &&
+                editReservationForm.controls["guests"].touched)
+                {
+                <p class="error">Vänligen ange antal gäster mellan 1 - 10 st.</p>
+                }
+
+                @if(editReservationForm.controls["reservation_time"].invalid &&
+                editReservationForm.controls["reservation_time"].touched)
+                {
+                <p class="error">Välj en tid till din bokning.</p>
+                }
+            </div>
+
+            <label for="message">
+                <textarea id="message" formControlName="message"></textarea>
+                <span class="input-span"
+                    [class.has-value]="editReservationForm.controls['message'].value !==''">Meddelande</span>
+            </label>
+
+            <button type="submit" class="reservation-btn" [disabled]="editReservationForm.invalid">Ändra
+                bokning</button>
+
+        </form>
+
+    </div>
+
+    <!-- Här loopas alla bokningar ut-->
+
+    <div class="reservation-container">
+        @for(res of reserverationService.reservation(); track res.reservation_id ) {
+        <article class="reservation-card">
+            <div class="details-container">
+                <div class="customer-details">
+                    <span class="badge">Bokningsnr: {{res.reservation_id}}</span>
+                    <h3>{{res.customer_name}}</h3>
+                    <ul>
+                        <li><strong>E-post:</strong> {{res.customer_email}}</li>
+                        <li><strong>Telefon:</strong> {{res.customer_phonenumber}}</li>
+                    </ul>
+                </div>
+
+                <div class="reservation-details">
+                    <ul>
+                        <li class="date">{{res.reservation_date}}</li>
+                        <li>Kl. {{res.reservation_time}} </li>
+                        <!--Antal gäster -->
+                        <li>{{res.guests}} {{res.guests === 1 ? "gäst" : "gäster"}} </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--Om meddelande finns -->
+            @if(res.message) {
+            <div class="reservation-message">
+                <p><strong>Meddelande:</strong> {{res.message}}.</p>
+            </div>
+            }
+
+            <div class="button-container">
+                <button type="button" (click)="getDataToEdit(res)" class="edit-btn">Ändra</button>
+                <button type="button" (click)="onDelete(res.reservation_id!, res.customer_name)"
+                    class="delete-btn">Radera</button>
+            </div>
+        </article>
+
+
+        } @empty{
+        @if(!error()) {
+        <p>Det finns inga inkomna bokningsförfrågningar.</p>
+        }
+        }
+    </div>
+
+
+
+</section>

@@ -1,0 +1,297 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+//Övergripande design och layout av komponent
+.manage-reservation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-width: 100vw;
+    width: 100%;
+    margin: 0 auto;
+    padding-block: 20px;
+    background-color: $primary-background-darker;
+
+    h2 {
+        text-align: center;
+
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+
+}
+
+
+//Container till bokningförfrågningar
+.reservation-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 1rem auto;
+    max-width: 900px;
+    width: 100%;
+
+    @media(max-width: 768px) {
+        grid-template-columns: 1fr;
+        padding-inline: 1rem;
+    }
+
+    //Ariktelkort
+    .reservation-card {
+        display: flex;
+        flex-direction: column;
+        background-color: $item-color;
+        border: 1px solid $secondary-component-color;
+        width: 100%;
+        padding: 1rem;
+
+
+        .details-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+
+
+            .customer-details {
+
+                .badge {
+                    display: inline-block;
+                    background-color: $footer-background;
+                    color: $light-text;
+                    font-size: 12px;
+                    padding: 6px 10px;
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                }
+
+                h3 {
+                    font-family: "outfit", sans-serif;
+                    font-size: 20px;
+                }
+
+                ul {
+                    display: block;
+                    list-style: none;
+
+                }
+
+
+            }
+
+            .reservation-details {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                background-color: $footer-background;
+                color: $light-text;
+                max-width: 130px;
+                width: 100%;
+                padding: 14px 20px;
+
+                ul {
+                    display: block;
+                    list-style: none;
+
+
+                    .date {
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        .reservation-message {
+            margin-top: 10px;
+
+            p {
+                text-align: left;
+                width: 100%;
+            }
+
+        }
+
+        //Knappar edit och delete
+        .button-container {
+            display: flex;
+            margin-top: auto;
+            gap: 12px;
+
+            .edit-btn {
+                @include action-button;
+                background-color: $accent-component-color;
+
+                &:hover {
+                    background-color: $darker-accent-component-color;
+                }
+            }
+
+            .delete-btn {
+                @include action-button;
+                background-color: $primary-component-color;
+
+                &:hover {
+                    background-color: $darker-primary-component-color;
+                }
+            }
+        }
+    }
+}
+
+
+
+//Visar och döljer formuläret
+.edit-form {
+    display: none;
+
+    &.visible {
+        display: block;
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    &.hidden {
+        display: block;
+        animation: fadeOut 0.5s ease forwards;
+    }
+}
+
+//Animationer
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+//Formulär
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    gap: 1rem;
+
+    legend {
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    label {
+        position: relative;
+
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        textarea {
+            background-color: #FDFAF6;
+            border: 1px solid $secondary-component-color;
+            padding: 16px 12px 10px 12px;
+            width: 100%;
+            font-size: 1rem;
+            outline: none;
+            transition: outline 0.2s ease;
+
+            &:focus {
+                outline: 1px solid $secondary-component-color;
+
+                //När användaren klickar i fältet.
+                &+span {
+                    top: 0;
+                    font-size: 12px;
+                    color: $secondary-component-color;
+                }
+            }
+        }
+
+        span {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            transition: all 0.2s ease;
+
+            //När värde finns i fältet
+            &.has-value {
+                top: 0;
+                font-size: 12px;
+                color: $secondary-component-color;
+            }
+        }
+
+
+        textarea {
+            height: 100%;
+            min-height: 120px;
+            max-height: 500px;
+            resize: vertical;
+        }
+
+    }
+
+    .reservation-details {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+
+        label {
+            flex: 1;
+
+            input {
+                padding: 12px;
+                height: 45px;
+            }
+        }
+    }
+
+
+    .error {
+        text-align: left;
+
+    }
+
+
+    .reservation-btn {
+        @include component-button;
+        background-color: $accent-component-color;
+        color: $light-text;
+
+        &:hover {
+            background-color: $darker-accent-component-color;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed; //Ändrar symbol om inte obligatorisk fält är ifyllda.
+        }
+
+
+
+    }
+
+}

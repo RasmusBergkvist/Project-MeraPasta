@@ -28,6 +28,7 @@ export class CategoryService {
     //Laddar kategorier
     async loadCategories() {
         const response = await this.getCategories();
+        //Uppdatera signal
         this.categories.set(response);
     }
 

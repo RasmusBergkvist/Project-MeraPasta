@@ -17,17 +17,6 @@
     h2 {
         text-align: center;
 
-
-        &::after {
-            content: '';
-            display: block;
-            width: min(400px, 50vw);
-            height: 1.5px;
-            margin: 5px auto;
-            border-radius: 1px;
-            background-color: $secondary-component-color;
-        }
-
     }
 
     p {

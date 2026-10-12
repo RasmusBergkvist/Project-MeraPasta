@@ -3,16 +3,18 @@ import { MangeCategory } from '../../partials/dashboard/mange-category/mange-cat
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { Menu } from '../../partials/home/menu/menu';
+import { ManageReservation } from '../../partials/dashboard/manage-reservation/manage-reservation';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MangeCategory,Menu],
+  imports: [MangeCategory, Menu, ManageReservation],
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
 
+  //Hämtar service
   authService = inject(AuthService);
   userService = inject(UserService);
 
