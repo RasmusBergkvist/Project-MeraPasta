@@ -1,0 +1,76 @@
+<section class="manage-category">
+    <h2>Hantera menykategori</h2>
+    <p>Här kan du skapa, uppdatera eller ta bort menykategori. Tänk på att om du tar bort en kategori raderas även
+        menyns innehåll.</p>
+
+    <!-- Vid skapad kategori -->
+    @if(successCreate()) {
+    <p class="success-text">{{successCreate()}}</p>
+    }
+    <!-- Felmeddelande -->
+    @if(errorCreate()) {
+    <p class="error-text">{{errorCreate()}}</p>
+    }
+
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="category-form">
+
+        <!-- Legend ändras beroende om kategori ska ändras eller skapas -->
+        <legend>{{editId() !== null ? "Ändra kategori" : "Skapa ny kategori"}}</legend>
+
+        <label for="category_name">
+            <input type="text" id="category-name" formControlName="category_name">
+            <span class="input-span"
+                [class.has-value]="categoryForm.controls['category_name'].value !==''">Kategori</span>
+            @if(categoryForm.controls["category_name"].invalid &&
+            categoryForm.controls["category_name"].touched)
+            {
+            <p class="error">Kategori måste bestå av minst 2 bokstäver.</p>
+            }
+        </label>
+
+        <!-- Knapp ändras beroende om kategori ska ändras eller skapas -->
+        <button type="submit" class="category-btn" [disabled]="categoryForm.invalid">{{editId() !== null ? "Ändra kategori" : "Skapa kategori"}}</button>
+    </form>
+
+
+    <section class="category-list">
+        <h3>Befintliga menykategorier</h3>
+
+        <!-- Vid skapad kategori -->
+        @if(successDelete()) {
+        <p class="success-text">{{successDelete()}}</p>
+        }
+        <!-- Felmeddelande -->
+        @if(errorDelete()) {
+        <p class="error-text">{{errorDelete()}}</p>
+        }
+
+
+        <ul>
+            @for(category of categoryService.categories(); track category.category_id) {
+            <li>
+                <span>{{category.category_name}}</span>
+
+                <div class="button-container">
+                 <button type="button" (click)="getDataToEdit(category)"
+                class="edit-btn">Ändra</button>
+                <button type="button" (click)="onDelete(category.category_id, category.category_name)"
+                class="delete-btn">Radera</button>
+                </div>
+            
+            </li>
+
+            <!-- Om inga menyer finns -->
+            } @empty {
+            @if(!errorDelete()) {
+            <li>Det finns inga sparade menyer.</li>
+            
+            }
+            }
+        </ul>
+
+    </section>
+
+
+
+</section>

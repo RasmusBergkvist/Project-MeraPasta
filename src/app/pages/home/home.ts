@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ReservationComponent } from '../../partials/reservation/reservation';
-import { About } from '../../partials/about/about';
-import { Menu } from '../../partials/menu/menu';
-import { OpeningHoursComponent } from '../../partials/opening-hours/opening-hours';
+import { ReservationComponent } from '../../partials/home/reservation/reservation';
+import { About } from '../../partials/home/about/about';
+import { OpeningHoursComponent } from '../../partials/home/opening-hours/opening-hours';
 import { RouterLink } from '@angular/router';
+import { Menu } from '../../partials/home/menu/menu';
 
 
 @Component({

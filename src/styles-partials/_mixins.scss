@@ -18,7 +18,7 @@
     }
 }
 
-
+//Större knappar
 @mixin component-button {
     display: inline-flex;
     background-color: $primary-component-color;
@@ -31,13 +31,29 @@
     cursor: pointer;
     transition: all 0.3s ease;
 
-    &:hover {  
+    &:hover {
         color: $light-text;
         transform: translateY(-3px);
-      
+
     }
+}
 
+//Mindre knappar
+@mixin action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    color: $light-text;
+    font-size: 14px;
+    border-radius: 8px;
+    gap: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
+    &:hover {
+        transform: translateY(-3px);
 
-    
+    }
 }

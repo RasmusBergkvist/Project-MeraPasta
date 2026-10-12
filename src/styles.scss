@@ -36,8 +36,12 @@ blockquote {
   font-family: "Lora", serif;
 }
 
-h2 {
+h1 {
   font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
   font-weight: 400;
 }
 
@@ -55,10 +59,17 @@ p {
 
 span,
 li,
-legend {
+legend, 
+textarea {
   font-family: "outfit", sans-serif;
 }
 
-.error {
+.error-text, .error {
   color: $primary-component-color;
 }
+
+.success-text {
+  color: $success-text;
+}
+
+

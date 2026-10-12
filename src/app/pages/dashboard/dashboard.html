@@ -1,2 +1,17 @@
+<section class="dashboard">
+    <h1>Välkommen {{authService.currentUsername()}}!</h1>
+    @if(authService.isAdmin()) {
+    <p>Här kan du hantera användare, bokningar, öppettider, menyer och dess innehåll.</p>
+    }@else{
+    <p>Här kan du hantera menyernas innehåll, bokningar och öppettider.</p>
 
-<p>dashboard works!</p>
+    }
+
+    <!-- Endast admin kan hantera menykategorierna -->
+    @if(authService.isAdmin()) {
+    <app-mange-category></app-mange-category>
+    }
+
+    <app-menu [isDashboard]="true"></app-menu>
+
+</section>

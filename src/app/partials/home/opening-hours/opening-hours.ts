@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { OpeningHoursService } from '../../services/openinghours.service';
+import { OpeningHoursService } from '../../../services/openinghours.service';
 
 
 @Component({

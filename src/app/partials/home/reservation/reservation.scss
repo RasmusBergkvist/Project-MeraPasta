@@ -23,7 +23,7 @@
             height: 1.5px;
             margin: 5px auto;
             border-radius: 1px;
-            background-color: #7A6A55;
+            background-color: $secondary-component-color;
         }
 
     }
@@ -33,14 +33,6 @@
         margin-bottom: 10px;
     }
 
-    .success-text {
-        color: rgb(54, 90, 54);
-    }
-
-    .error-text {
-
-        color: $primary-component-color;
-    }
 
 }
 
@@ -91,7 +83,7 @@ form {
             left: 12px;
             transition: all 0.2s ease;
 
-            //När värde finns i fäletet
+            //När värde finns i fältet
             &.has-value {
                 top: 0;
                 font-size: 12px;

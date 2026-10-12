@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReservationService } from '../../services/reservation.service';
+import { ReservationService } from '../../../services/reservation.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Reservation } from '../../models/reservation.interface';
+import { Reservation } from '../../../models/reservation.interface';
 import { firstValueFrom } from 'rxjs';
 
 

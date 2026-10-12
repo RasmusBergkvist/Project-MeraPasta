@@ -15,14 +15,16 @@ export class UserService {
     //Hämtar service
     authService = inject(AuthService);
 
-    //Skapar en headers
-    private headers = {
-        "Authorization": `Bearer ${this.authService.token()}`
-    }
 
     //Hämta användare
     async getUsers(): Promise<User[]> {
-        const request = this.http.get<User[]>(this.url, {headers: this.headers});
+
+        //Skapar en headers
+        const headers = {
+            "Authorization": `Bearer ${this.authService.token()}`
+        }
+
+        const request = this.http.get<User[]>(this.url, { headers: headers });
         return await firstValueFrom(request);
     }
 
@@ -36,8 +38,13 @@ export class UserService {
     //Skapa användare
     async registerUser(user: User): Promise<void> {
 
+        //Skapar en headers
+        const headers = {
+            "Authorization": `Bearer ${this.authService.token()}`
+        }
 
-        const newUser = this.http.post<void>(this.url + "/register", user, {headers: this.headers});
+
+        const newUser = this.http.post<void>(this.url + "/register", user, { headers: headers });
         await firstValueFrom(newUser);
 
         //Anropar loadUser för att hämta den aktuella användarlistan.
@@ -46,10 +53,17 @@ export class UserService {
 
     //Radera användare
     async deleteUser(deleteId: number): Promise<void> {
-        const request = this.http.delete<void>(`${this.url}/${deleteId}`, {headers: this.headers});
+
+        //Skapar en headers
+        const headers = {
+            "Authorization": `Bearer ${this.authService.token()}`
+        }
+
+        const request = this.http.delete<void>(`${this.url}/${deleteId}`, { headers: headers });
         await firstValueFrom(request);
-        //Anropar loadUser för att hämta den aktuella användarlistan.
-        await this.loadUsers();
+        
+        //Filtrerar bort användare som tagits från signal
+        this.users.update(users => users.filter(user => user.user_id !== deleteId));
     }
 
 

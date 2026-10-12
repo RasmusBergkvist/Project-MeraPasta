@@ -48,7 +48,7 @@ export class Users {
       //Återställer formuläret
       this.registerForm.reset();
 
-      //Meddelande vid lyckad bokning.
+      //Meddelande vid skapad användare.
       this.successCreate.set(`Användare skapad för ${registerInput.username}`)
 
       //Meddelandent nollställs efter 5 sekunder.
@@ -57,8 +57,11 @@ export class Users {
       }, 5000);
 
     } catch (error: any) {
-      //Om användaren redan finns.
-      if (error.status === 409) {
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.errorCreate.set("Din inloggningsession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+      }else if (error.status === 409) {
+        //Om användaren redan finns.
         this.errorCreate.set("Användaren finns redan!");
       } else {
         this.errorCreate.set("Det gick inte att skapa användaren. Försök igen senare.")
@@ -82,17 +85,17 @@ export class Users {
   //Radera användare
   async onDelete(userId: number, username: string): Promise<void> {
     try {
-    await this.userService.deleteUser(userId);
+      await this.userService.deleteUser(userId);
 
-    //Meddelande vid radering
-    this.successDelete.set(`Användaren har raderats: ${username}`);
+      //Meddelande vid radering
+      this.successDelete.set(`Användaren har raderats: ${username}`);
 
-    //Meddelandent nollställs efter 5 sekunder.
-    setTimeout(() => {
-      this.successDelete.set("")
-    }, 5000);
+      //Meddelandent nollställs efter 5 sekunder.
+      setTimeout(() => {
+        this.successDelete.set("")
+      }, 5000);
 
-  }catch(error: any) {
+    } catch (error: any) {
       //Om användaren redan finns.
       if (error.status === 400) {
         this.errorDelete.set("Det måste finnas minst en administratör!");

@@ -1,0 +1,138 @@
+<section id="menu" class="menu-section">
+
+    <h2>{{isDashboard() ? "Hantera menyer" : "Meny"}}</h2>
+
+    <!-- Allmänna felmeddelande-->
+    @if(error()) {
+    <p class="error-text">{{error()}}</p>
+    }
+
+    <!-- Formulär endast för dashboard-->
+    @if(isDashboard()) {
+
+    <!-- Vid skapad menyartikel -->
+    @if(successCreate()) {
+    <p class="success-text">{{successCreate()}}</p>
+    }
+    <!-- När menyartikel inte skapas -->
+    @if(errorCreate()) {
+    <p class="error-text">{{errorCreate()}}</p>
+    }
+
+    <form [formGroup]="menuForm" (ngSubmit)="onSubmit()" class="menu-form">
+        <legend>Lägg till menyartikel</legend>
+
+        <label for="item-name">
+            <input type="text" id="item-name" formControlName="item_name">
+            <span class="input-span" [class.has-value]="menuForm.controls['item_name'].value !==''">Menyartikel</span>
+            @if(menuForm.controls["item_name"].invalid &&
+            menuForm.controls["item_name"].touched)
+            {
+            <p class="error">Menyartikel måste bestå av minst 2 bokstäver.</p>
+            }
+        </label>
+
+
+        <label for="price">
+            <input type="number" id="price" formControlName="item_price" min="1">
+            <span class="input-span" [class.has-value]="menuForm.controls['item_price'].value !== null">Pris</span>
+            @if(menuForm.controls["item_price"].invalid &&
+            menuForm.controls["item_price"].touched)
+            {
+            <p class="error">Ange pris för menyartikel.</p>
+            }
+        </label>
+
+        <label for="category">Välj meny till artikel
+            <select id="category" formControlName="category_id">
+                <option value="" disabled selected>Välj en meny</option>
+
+                //Loopar ut namnen på kategorier
+                @for(category of categoryService.categories(); track category.category_id) {
+                <option [value]="category.category_id">{{category.category_name}}</option>
+                }
+            </select>
+        </label>
+
+
+        <label for="message">
+            <textarea id="message" formControlName="item_description"></textarea>
+            <span class="input-span"
+                [class.has-value]="menuForm.controls['item_description'].value !==''">Beskrivning</span>
+        </label>
+
+
+        <button type="submit" class="menu-btn" [disabled]="menuForm.invalid">Lägg till</button>
+    </form>
+
+    }
+
+    <!-- Menykategorier-->
+    <nav class="menu-nav">
+        <ul>
+            @for(category of categoryService.categories(); track category.category_id) {
+            <li>
+                <a (click)="changeCategory(category.category_id)"
+                    [class.active]="category.category_id === selectedCategory()">{{category.category_name}}</a>
+            </li>
+
+            <!-- Om inga menyer finns -->
+            } @empty {
+            @if(!error()) {
+            <li>Det finns inga sparade menyer.</li>
+            }
+            }
+        </ul>
+    </nav>
+
+    <!-- Menyartiklar-->
+    <div class="menu-container">
+        @if(isDashboard()) {
+        <!-- Vid radering av menyartikel. Visas på Dashboard -->
+        @if(successDelete()) {
+        <p class="success-text">{{successDelete()}}</p>
+        }
+        <!-- När menyartikel inte kan raderas. Visas på Dashboard  -->
+        @if(errorDelete()) {
+        <p class="error-text">{{errorDelete()}}</p>
+        }
+
+        }
+
+        @for(item of menuItemService.menuItems(); track item.item_id)
+        {
+
+        <article class="item-card">
+            <div class="item-details">
+                <h3 class="item-name">{{item.item_name}}</h3>
+                <span class="item-price">{{item.item_price}} kr</span>
+            </div>
+            <!-- Om det finns en beskrivning till artikeln -->
+            @if(item.item_description) {
+            <p class="item-description">{{item.item_description}}.</p>
+            }
+
+            <!-- Knapparna visas endast via Dashboard -->
+            @if(isDashboard()) {
+            <div class="button-container">
+                <button type="button" (click)="getDataToEdit(item)"
+                    class="edit-btn">Ändra</button>
+                <button type="button" (click)="onDelete(item.item_id!, item.item_name)"
+                    class="delete-btn">Radera</button>
+            </div>
+            }
+
+        </article>
+
+        <!-- Om det inte finns några artiklar till menyn -->
+        } @empty {
+        @if(!error() && selectedCategory()) {
+        <p class="menu-empty">Det finns inga maträtter sparade till denna menyn.</p>
+
+        }
+        }
+
+
+
+    </div>
+</section>
