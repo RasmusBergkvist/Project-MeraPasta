@@ -7,9 +7,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
     width: 100%;
     min-height: 100vh;
+
+
 
     display: flex;
     flex-direction: column;
@@ -21,6 +22,8 @@
         text-align: center;
         font-size: 4rem;
         color: $light-text;
+         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.95);
+
 
         //Strecket mellan rubrik och text
         &::after {
@@ -38,6 +41,7 @@
     p {
         font-size: 1.5rem;
         color: $light-text;
+         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.95);
     }
 
     .hero-btn {
@@ -47,7 +51,6 @@
 
         a {
             @include nav-button;
-
             width: 150px;
             height: 50px;
             background-color: rgba(0, 0, 0, 0.4);
@@ -67,6 +70,31 @@
         }
     }
 
+}
+
+//Mobiler
+@media(max-width: 768px) {
+    .hero-section {
+        min-height: 55vh;
+
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .hero-btn {
+
+            a {
+                width: 120px;
+                height: 40px;
+            }
+        }
+
+    }
 }
 
 //BANNER MED BILD OCH CITAT
@@ -89,7 +117,12 @@
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.95);
         text-align: center;
         padding-inline: 10px;
-       
+
+
+        @media(max-width: 768px) {
+            font-size: 2rem;
+        }
+
     }
 
 }

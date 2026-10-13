@@ -1,4 +1,4 @@
-<section id="-mange-opening-hours" class="manage-opening-hours">
+<section id="manage-opening-hours" class="manage-opening-hours">
     <h2>Hantera öppettider</h2>
     <p>Här kan du lägga till, ändra och radera öppettiderna.</p>
 
@@ -28,9 +28,10 @@
             </div>
 
             <div class="button-container">
-                <button type="button" (click)="getDataToEdit(hour)" class="edit-btn">Ändra</button>
-                <button type="button" (click)="onDelete(hour.open_id, hour.day_of_week)"
-                    class="delete-btn">Radera</button>
+                <button type="button" (click)="getDataToEdit(hour)" class="edit-btn"
+                    attr.aria-label="Ändra öppettid för {{hour.day_of_week}}">Ändra</button>
+                <button type="button" (click)="onDelete(hour.open_id, hour.day_of_week)" class="delete-btn"
+                    attr.aria-label="Radera öppettid för {{hour.day_of_week}}">Radera</button>
             </div>
         </li>
 
@@ -71,12 +72,11 @@
         @if((hourForm.controls['open_time'].value && !hourForm.controls['close_time'].value) ||
         (!hourForm.controls['open_time'].value && hourForm.controls['close_time'].value))
         {
-        <p class="error">Fyll i både öppnings- och stängstid. Vid stäng lämnas både fälten tomma. </p>
+        <p class="error">Fyll i både öppnings- och stängningstid. Vid stäng lämnas både fälten tomma. </p>
         }
 
         <!-- Knapp ändras beroende om kategori ska ändras eller skapas -->
-        <button type="submit" class="hour-btn" [disabled]="hourForm.invalid">{{editId() !== null ? "Ändra" : "Lägg till
-            "}}</button>
+        <button type="submit" class="hour-btn" [disabled]="hourForm.invalid">{{editId() ? "Ändra" : "Lägg till" }}</button>
     </form>
 
 </section>

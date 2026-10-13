@@ -134,9 +134,10 @@
             }
 
             <div class="button-container">
-                <button type="button" (click)="getDataToEdit(res)" class="edit-btn">Ändra</button>
+                <button type="button" (click)="getDataToEdit(res)" class="edit-btn"
+                    attr.aria-label="Ändra bokningsnummer {{res.reservation_id}}">Ändra</button>
                 <button type="button" (click)="onDelete(res.reservation_id!, res.customer_name)"
-                    class="delete-btn">Radera</button>
+                    class="delete-btn" attr.aria-label="Radera bokningsnummer {{res.reservation_id}}">Radera</button>
             </div>
         </article>
 

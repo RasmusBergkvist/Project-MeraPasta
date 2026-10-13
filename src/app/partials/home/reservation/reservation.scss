@@ -8,6 +8,7 @@
     align-items: center;
     margin: 0 auto;
     padding-block: 2rem;
+    padding-inline: 1rem;
     background-color: $primary-background-darker;
     gap: 6px;
 
@@ -106,6 +107,14 @@ form {
         flex-direction: row;
         gap: 12px;
 
+
+        @media(max-width: 600px) {
+            flex-direction: column;
+            width: 100%;
+
+        }
+
+
         label {
             flex: 1;
 
@@ -119,7 +128,7 @@ form {
 
     .error {
         text-align: left;
-        
+
     }
 
 

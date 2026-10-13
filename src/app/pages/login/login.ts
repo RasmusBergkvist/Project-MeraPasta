@@ -48,11 +48,14 @@ export class Login {
       //Vid lyckad inloggning skickas användaren till dashboard
       this.router.navigate(["/dashboard"]);
 
-    } catch(error) {
-      console.error(error);
-      this.error.set("Felaktig e-post eller lösenord!")
+    } catch (error: any) {
+      if (error.status === 401) {
+        this.error.set("Felaktig e-post eller lösenord!")
+      } else {
+        this.error.set("Det går inte att logga in just nu. Försök igen senare.")
+      }
     }
-}
+  }
 
 
 }

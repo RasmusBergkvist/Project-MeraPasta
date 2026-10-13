@@ -13,6 +13,7 @@
     padding-inline: 1rem;
     padding-top: 150px;
     padding-bottom: 60px;
+    padding-inline: 1rem;
     background-color: $primary-background;
 
 
@@ -168,7 +169,7 @@ form {
         .delete-btn {
             @include action-button;
             background-color: $primary-component-color;
-    
+
 
             &:hover {
                 background-color: $darker-primary-component-color;

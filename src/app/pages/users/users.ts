@@ -78,7 +78,17 @@ export class Users {
 
   //vid start
   async ngOnInit() {
+    try{
     await this.userService.loadUsers();
+   } catch (error: any) {
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.errorCreate.set("Din inloggningssession har passerat. Vänligen logga in på nytt.");
+      } else {
+        this.errorCreate.set("Det går inte att hämta användare för tillfället.");
+      }
+    }
+
 
   }
 
