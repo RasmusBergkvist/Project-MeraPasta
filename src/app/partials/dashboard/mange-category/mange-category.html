@@ -20,7 +20,7 @@
         <label for="category_name">
             <input type="text" id="category-name" formControlName="category_name">
             <span class="input-span"
-                [class.has-value]="categoryForm.controls['category_name'].value !==''">Kategori</span>
+                [class.has-value]="categoryForm.controls['category_name'].value">Kategori</span>
             @if(categoryForm.controls["category_name"].invalid &&
             categoryForm.controls["category_name"].touched)
             {
@@ -69,7 +69,5 @@
             }
         </ul>
     </section>
-
-
 
 </section>

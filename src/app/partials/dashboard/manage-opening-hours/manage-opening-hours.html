@@ -1,0 +1,82 @@
+<section id="-mange-opening-hours" class="manage-opening-hours">
+    <h2>Hantera öppettider</h2>
+    <p>Här kan du lägga till, ändra och radera öppettiderna.</p>
+
+
+    <!-- När öppettid skapas eller uppdateras-->
+    @if(success()) {
+    <p class="success-text">{{success()}}</p>
+    }
+
+    @if(error()) {
+    <p class="error">{{error()}}</p>
+    }
+
+
+
+    <ul class="opening-hours-list">
+
+        @for(hour of openingHoursService.openingHours(); track hour.open_id) {
+        <li>
+            <div class="hour-container">
+                <span>{{hour.day_of_week}}</span>
+                @if(hour.open_time === null || hour.open_time === "") {
+                <span>Stängt</span>
+                }@else {
+                <span>{{hour.open_time}} - {{hour.close_time}}</span>
+                }
+            </div>
+
+            <div class="button-container">
+                <button type="button" (click)="getDataToEdit(hour)" class="edit-btn">Ändra</button>
+                <button type="button" (click)="onDelete(hour.open_id, hour.day_of_week)"
+                    class="delete-btn">Radera</button>
+            </div>
+        </li>
+
+        } @empty {
+        @if(!error()) {
+        <p>Det finns inga öppettider tillgängliga.</p>
+        }
+        }
+    </ul>
+
+    <!-- Formulär: Skapa eller uppdatera öppettider-->
+    <form [formGroup]="hourForm" (ngSubmit)="onSubmit()" class="hour-form">
+
+        <!-- Legend ändras beroende om öppettid ska ändras eller skapas -->
+        <legend>{{editId() !== null ? "Ändra öppettid" : "Lägg till öppettid"}}</legend>
+
+        <label for="day-of-week">
+            <input type="text" id="day-of-week" formControlName="day_of_week">
+            <span class="input-span" [class.has-value]="hourForm.controls['day_of_week'].value">Veckodag</span>
+            @if(hourForm.controls['day_of_week'].invalid &&
+            hourForm.controls['day_of_week'].touched)
+            {
+            <p class="error">Dagen måste bestå av minst 6 bokstäver.</p>
+            }
+        </label>
+
+        <div class="time-container">
+            <label for="open-time">Öppningstid
+                <input type="time" id="open-time" formControlName="open_time">
+            </label>
+
+            <label for="close-time">Stäningstid
+                <input type="time" id="open-time" formControlName="close_time">
+            </label>
+        </div>
+
+        <!--Kontroll att antingen både eller inga av fälten är ifyllda. -->
+        @if((hourForm.controls['open_time'].value && !hourForm.controls['close_time'].value) ||
+        (!hourForm.controls['open_time'].value && hourForm.controls['close_time'].value))
+        {
+        <p class="error">Fyll i både öppnings- och stängstid. Vid stäng lämnas både fälten tomma. </p>
+        }
+
+        <!-- Knapp ändras beroende om kategori ska ändras eller skapas -->
+        <button type="submit" class="hour-btn" [disabled]="hourForm.invalid">{{editId() !== null ? "Ändra" : "Lägg till
+            "}}</button>
+    </form>
+
+</section>

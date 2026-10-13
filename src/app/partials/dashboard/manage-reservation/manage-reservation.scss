@@ -1,7 +1,7 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
-//Övergripande design och layout av komponent
+//Övergripande design och layout av komponent: Manage reservation
 .manage-reservation {
     display: flex;
     flex-direction: column;
@@ -50,8 +50,9 @@
         border: 1px solid $secondary-component-color;
         width: 100%;
         padding: 1rem;
+        gap: 14px;
 
-
+        //Namn, e-post och telefon.
         .details-container {
             display: flex;
             justify-content: space-between;
@@ -63,7 +64,7 @@
 
                 .badge {
                     display: inline-block;
-                    background-color: $footer-background;
+                    background-color: #413A30;
                     color: $light-text;
                     font-size: 12px;
                     padding: 6px 10px;
@@ -71,9 +72,11 @@
                     margin-bottom: 10px;
                 }
 
-                h3 {
+                .customer-name {
                     font-family: "outfit", sans-serif;
                     font-size: 20px;
+                    text-transform: capitalize;
+
                 }
 
                 ul {
@@ -85,15 +88,19 @@
 
             }
 
+            //Datum, tid och antal gäster
             .reservation-details {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 text-align: center;
-                background-color: $footer-background;
+                background-color: #413A30;
+                border-radius: 6px;
                 color: $light-text;
                 max-width: 130px;
                 width: 100%;
-                padding: 14px 20px;
+                padding: 10px;
 
                 ul {
                     display: block;
@@ -108,6 +115,7 @@
             }
         }
 
+        //Meddelande vid bokkning
         .reservation-message {
             margin-top: 10px;
 
@@ -122,6 +130,8 @@
         .button-container {
             display: flex;
             margin-top: auto;
+            padding-top: 6px;
+            justify-content: flex-end;
             gap: 12px;
 
             .edit-btn {

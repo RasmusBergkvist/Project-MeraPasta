@@ -47,7 +47,7 @@ export class ReservationComponent {
 
     try {
       //Skickar bokningsförfrågan
-      await firstValueFrom(this.reservationService.createReservation(reservationInput));
+      firstValueFrom(this.reservationService.createReservation(reservationInput));
 
       //Meddelande vid lyckad bokning.
       this.success.set("Din bokningsförfrågan är skickad. Vi återkommer till dig med en bekräftelse på din bokning.")

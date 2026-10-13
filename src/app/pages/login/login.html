@@ -12,7 +12,7 @@
         <label for="email">
             <input type="email" id="email" formControlName="email">
             <span class="input-span"
-                [class.has-value]="loginForm.controls['email'].value !==''">E-post</span>
+                [class.has-value]="loginForm.controls['email'].value">E-post</span>
             @if(loginForm.controls["email"].invalid &&
             loginForm.controls["email"].touched)
             {
@@ -22,7 +22,7 @@
 
         <label for="password">
             <input type="password" id="password" formControlName="password">
-            <span class="input-span" [class.has-value]="loginForm.controls['password'].value !==''">Lösenord</span>
+            <span class="input-span" [class.has-value]="loginForm.controls['password'].value">Lösenord</span>
             @if(loginForm.controls["password"].invalid &&
             loginForm.controls["password"].touched)
             {

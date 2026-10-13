@@ -67,7 +67,7 @@ export class ReservationService {
     }
 
 
-    //Radera menyartikel
+    //Radera bokningsförfrågan
     async deleteMenuItem(reservationId: number): Promise<void> {
         //Skapar en headers
         const headers = {

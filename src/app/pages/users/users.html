@@ -17,7 +17,7 @@
 
         <label for="username">
             <input type="text" id="username" formControlName="username">
-            <span class="input-span" [class.has-value]="registerForm.controls['username'].value !==''">Namn</span>
+            <span class="input-span" [class.has-value]="registerForm.controls['username'].value">Namn</span>
             @if(registerForm.controls["username"].invalid &&
             registerForm.controls["username"].touched)
             {
@@ -28,7 +28,7 @@
 
         <label for="email">
             <input type="email" id="email" formControlName="email">
-            <span class="input-span" [class.has-value]="registerForm.controls['email'].value !==''">E-post</span>
+            <span class="input-span" [class.has-value]="registerForm.controls['email'].value">E-post</span>
             @if(registerForm.controls["email"].invalid &&
             registerForm.controls["email"].touched)
             {
@@ -39,7 +39,7 @@
 
         <label for="password">
             <input type="password" id="password" formControlName="password">
-            <span class="input-span" [class.has-value]="registerForm.controls['password'].value !==''">Lösenord</span>
+            <span class="input-span" [class.has-value]="registerForm.controls['password'].value">Lösenord</span>
             @if(registerForm.controls["password"].invalid &&
             registerForm.controls["password"].touched)
             {

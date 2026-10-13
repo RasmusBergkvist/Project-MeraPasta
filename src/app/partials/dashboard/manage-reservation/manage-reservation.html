@@ -22,7 +22,7 @@
                 <input type="text" id="name" formControlName="customer_name">
 
                 <span class="input-span"
-                    [class.has-value]="editReservationForm.controls['customer_name'].value !==''">Namn</span>
+                    [class.has-value]="editReservationForm.controls['customer_name'].value">Namn</span>
 
                 @if(editReservationForm.controls["customer_name"].invalid &&
                 editReservationForm.controls["customer_name"].touched)
@@ -34,7 +34,7 @@
             <label for="email">
                 <input type="email" id="email" formControlName="customer_email">
                 <span class="input-span"
-                    [class.has-value]="editReservationForm.controls['customer_email'].value !==''">E-post</span>
+                    [class.has-value]="editReservationForm.controls['customer_email'].value">E-post</span>
                 @if(editReservationForm.controls["customer_email"].invalid &&
                 editReservationForm.controls["customer_email"].touched)
                 {
@@ -45,7 +45,7 @@
             <label for="phone">
                 <input type="tel" id="phone" formControlName="customer_phonenumber">
                 <span class="input-span"
-                    [class.has-value]="editReservationForm.controls['customer_phonenumber'].value !==''">Telefon</span>
+                    [class.has-value]="editReservationForm.controls['customer_phonenumber'].value">Telefon</span>
                 @if(editReservationForm.controls["customer_phonenumber"].invalid &&
                 editReservationForm.controls["customer_phonenumber"].touched)
                 {
@@ -91,7 +91,7 @@
             <label for="message">
                 <textarea id="message" formControlName="message"></textarea>
                 <span class="input-span"
-                    [class.has-value]="editReservationForm.controls['message'].value !==''">Meddelande</span>
+                    [class.has-value]="editReservationForm.controls['message'].value">Meddelande</span>
             </label>
 
             <button type="submit" class="reservation-btn" [disabled]="editReservationForm.invalid">Ändra
@@ -101,7 +101,7 @@
 
     </div>
 
-    <!-- Här loopas alla bokningar ut-->
+    <!-- Här visas bokningarna -->
 
     <div class="reservation-container">
         @for(res of reserverationService.reservation(); track res.reservation_id ) {
@@ -109,7 +109,7 @@
             <div class="details-container">
                 <div class="customer-details">
                     <span class="badge">Bokningsnr: {{res.reservation_id}}</span>
-                    <h3>{{res.customer_name}}</h3>
+                    <h3 class="customer-name">{{res.customer_name}}</h3>
                     <ul>
                         <li><strong>E-post:</strong> {{res.customer_email}}</li>
                         <li><strong>Telefon:</strong> {{res.customer_phonenumber}}</li>

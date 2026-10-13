@@ -24,7 +24,7 @@
 
         <label for="item-name">
             <input type="text" id="item-name" formControlName="item_name">
-            <span class="input-span" [class.has-value]="menuForm.controls['item_name'].value !==''">Menyartikel</span>
+            <span class="input-span" [class.has-value]="menuForm.controls['item_name'].value">Menyartikel</span>
             @if(menuForm.controls["item_name"].invalid &&
             menuForm.controls["item_name"].touched)
             {
@@ -35,7 +35,7 @@
 
         <label for="price">
             <input type="number" id="price" formControlName="item_price" min="1">
-            <span class="input-span" [class.has-value]="menuForm.controls['item_price'].value !== null">Pris</span>
+            <span class="input-span" [class.has-value]="menuForm.controls['item_price'].value">Pris</span>
             @if(menuForm.controls["item_price"].invalid &&
             menuForm.controls["item_price"].touched)
             {
@@ -58,7 +58,7 @@
         <label for="message">
             <textarea id="message" formControlName="item_description"></textarea>
             <span class="input-span"
-                [class.has-value]="menuForm.controls['item_description'].value !==''">Beskrivning</span>
+                [class.has-value]="menuForm.controls['item_description'].value">Beskrivning</span>
         </label>
 
 

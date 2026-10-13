@@ -73,7 +73,7 @@ export class ManageReservation {
 
     //Om Id inte finns
     if (!currentId) {
-      this.error.set("Det gick inte att hitta bokningen som uppdateras.")
+      this.error.set("Det gick inte att hitta bokningen.")
       return;
     }
 
@@ -95,7 +95,7 @@ export class ManageReservation {
       //Rensar formuläret och editId
       this.editReservationForm.reset();
       this.editId.set(null);
-      
+
     } catch (error: any) {
       if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.

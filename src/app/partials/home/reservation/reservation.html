@@ -18,7 +18,7 @@
             <input type="text" id="name" formControlName="customer_name">
 
             <span class="input-span"
-                [class.has-value]="reservationForm.controls['customer_name'].value !==''">Namn</span>
+                [class.has-value]="reservationForm.controls['customer_name'].value">Namn</span>
 
             @if(reservationForm.controls["customer_name"].invalid && reservationForm.controls["customer_name"].touched)
             {
@@ -29,7 +29,7 @@
         <label for="email">
             <input type="email" id="email" formControlName="customer_email">
             <span class="input-span"
-                [class.has-value]="reservationForm.controls['customer_email'].value !==''">E-post</span>
+                [class.has-value]="reservationForm.controls['customer_email'].value">E-post</span>
             @if(reservationForm.controls["customer_email"].invalid &&
             reservationForm.controls["customer_email"].touched)
             {
@@ -40,7 +40,7 @@
         <label for="phone">
             <input type="tel" id="phone" formControlName="customer_phonenumber">
             <span class="input-span"
-                [class.has-value]="reservationForm.controls['customer_phonenumber'].value !==''">Telefon</span>
+                [class.has-value]="reservationForm.controls['customer_phonenumber'].value">Telefon</span>
             @if(reservationForm.controls["customer_phonenumber"].invalid &&
             reservationForm.controls["customer_phonenumber"].touched)
             {
@@ -86,7 +86,7 @@
         <label for="message">
             <textarea id="message" formControlName="message"></textarea>
             <span class="input-span"
-                [class.has-value]="reservationForm.controls['message'].value !==''">Meddelande</span>
+                [class.has-value]="reservationForm.controls['message'].value">Meddelande</span>
         </label>
 
         <button type="submit" class="reservation-btn" [disabled]="reservationForm.invalid">Skicka bokning</button>

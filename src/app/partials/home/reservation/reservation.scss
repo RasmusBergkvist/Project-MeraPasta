@@ -38,7 +38,7 @@
 
 
 
-//FORMULÄR
+//Formulär
 form {
     display: flex;
     flex-direction: column;
@@ -57,7 +57,7 @@ form {
         input[type="time"],
         input[type="number"],
         textarea {
-            background-color: #FDFAF6;
+            background-color: $item-color;
             border: 1px solid $secondary-component-color;
             padding: 16px 12px 10px 12px;
             width: 100%;
