@@ -1,11 +1,25 @@
 <!-- Id ändras till navigering med fragments i olika huvudmenyer -->
-<section [id]= "isDashboard() ? 'manage-menu' : 'menu'" class="menu-section">
+<section [id]="isDashboard() ? 'manage-menu' : 'menu'" class="menu-section">
 
     <h2>{{isDashboard() ? "Hantera menyartiklar" : "Meny"}}</h2>
 
     <!-- Allmänna felmeddelande-->
     @if(error()) {
     <p class="error-text">{{error()}}</p>
+    }
+
+    <!-- Spinner när menyn laddas -->
+    @if(isLoading()) {
+    <div class="loading-container">
+        <div class="spinner-wrapper">
+            <div class="spinner"></div>
+            <span class="material-symbols-outlined icon">
+                restaurant
+            </span>
+        </div>
+        <p class="loading-text">Una minuta - Meny laddas...</p>
+    </div>
+
     }
 
     <!-- Formulär endast för dashboard-->
@@ -58,8 +72,7 @@
 
         <label for="message">
             <textarea id="message" formControlName="item_description"></textarea>
-            <span class="input-span"
-                [class.has-value]="menuForm.controls['item_description'].value">Beskrivning</span>
+            <span class="input-span" [class.has-value]="menuForm.controls['item_description'].value">Beskrivning</span>
         </label>
 
 
@@ -67,6 +80,9 @@
     </form>
 
     }
+
+    <!-- Visas bara när menyn har hämtats-->
+    @if(!isLoading()) {
 
     <!-- Menykategorier-->
     <nav class="menu-nav">
@@ -116,10 +132,10 @@
             <!-- Knapparna visas endast via Dashboard -->
             @if(isDashboard()) {
             <div class="button-container">
-                <button type="button" (click)="getDataToEdit(item)"
-                    class="edit-btn" attr.aria-label="Ändra {{item.item_name}}">Ändra</button>
-                <button type="button" (click)="onDelete(item.item_id!, item.item_name)"
-                    class="delete-btn" attr.aria-label="Radera {{item.item_name}}">Radera</button>
+                <button type="button" (click)="getDataToEdit(item)" class="edit-btn"
+                    attr.aria-label="Ändra {{item.item_name}}">Ändra</button>
+                <button type="button" (click)="onDelete(item.item_id!, item.item_name)" class="delete-btn"
+                    attr.aria-label="Radera {{item.item_name}}">Radera</button>
             </div>
             }
 
@@ -136,4 +152,5 @@
 
 
     </div>
+    }
 </section>

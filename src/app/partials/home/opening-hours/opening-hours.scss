@@ -1,6 +1,6 @@
 @use 'variables' as *;
 
-//OPENING HOURS SECTION
+//Övergripande design och layout av komponent: Opening Hours
 
 .opening-hours-section {
     display: flex;
@@ -34,7 +34,28 @@
 
 }
 
-//ÖPPETTIDER
+//Laddningstexten
+.loading-text {
+    font-size: 20px;
+    font-style: italic;
+    animation: scale 2s ease-in-out infinite;
+    
+}
+
+//Animationn
+@keyframes scale {
+    0% {
+        scale: 1.15;
+    }
+    50% {
+        scale: 0.9;
+    }
+    100% {
+        scale: 1.15;
+    }
+}
+
+//Lista med öppetiderna
 .opening-hours-list {
     display: flex;
     flex-direction: column;
@@ -62,7 +83,7 @@
 
 }
 
-//Övriga öppettider
+//Textruta med övriga öppettider
 article {
     display: block;
     margin: 0 auto;

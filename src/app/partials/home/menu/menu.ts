@@ -23,6 +23,9 @@ export class Menu {
   errorDelete = signal<string>("");
   successDelete = signal<string>("");
 
+  //Signal till laddningsanimation
+  isLoading = signal<boolean>(false);
+
 
   //Signal till vald kategori 
   selectedCategory = signal<number | null>(null);
@@ -47,7 +50,7 @@ export class Menu {
   //Hämta data till redigering
   getDataToEdit(item: MenuItem) {
     //Om Id inte finns
-    if(!item.item_id) {
+    if (!item.item_id) {
       return;
     }
     //Uppdaterar signal med id
@@ -93,11 +96,11 @@ export class Menu {
         this.editId.set(null);
       } else {
 
-      //Skapar menyartikel
-      await this.menuItemService.createMenuItem(menuInput);
+        //Skapar menyartikel
+        await this.menuItemService.createMenuItem(menuInput);
 
-      //Meddelande vid skapad kategori.
-      this.successCreate.set(`Menyartikel skapad: ${menuInput.item_name}`)
+        //Meddelande vid skapad kategori.
+        this.successCreate.set(`Menyartikel skapad: ${menuInput.item_name}`)
       }
 
       //Återställer formuläret
@@ -110,9 +113,9 @@ export class Menu {
 
     } catch (error: any) {
 
-      if(error.status === 403) {
+      if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.
-         this.errorCreate.set("Din inloggningsession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+        this.errorCreate.set("Din inloggningssession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
       } else if (error.status === 409) {
         //Om menyartikel redan finns.
         this.errorCreate.set("Menyartikeln finns redan!");
@@ -136,6 +139,8 @@ export class Menu {
   async ngOnInit() {
 
     try {
+      //Visar spinner
+      this.isLoading.set(true);
 
       //Laddar kategorier
       await this.categoryService.loadCategories();
@@ -156,6 +161,9 @@ export class Menu {
 
     } catch (error) {
       this.error.set("Menyerna kunde inte laddas. Försök igen senare.");
+    } finally {
+      //Döljer menyn
+      this.isLoading.set(false);
     }
 
   }
@@ -187,8 +195,13 @@ export class Menu {
         this.successDelete.set("")
       }, 5000);
 
-    } catch (error) {
-      this.errorDelete.set("Det gick inte att radera menyartikeln. Försök igen senare.")
+    } catch (error: any) {
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.errorDelete.set("Din inloggningssession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+      } else {
+        this.errorDelete.set("Det gick inte att radera menyartikeln. Försök igen senare.")
+      }
 
 
       //Meddelandent nollställs efter 5 sekunder.

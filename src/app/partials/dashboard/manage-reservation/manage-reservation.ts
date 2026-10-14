@@ -141,8 +141,13 @@ export class ManageReservation {
         this.success.set("")
       }, 5000);
 
-    } catch (error) {
-      this.error.set("Det gick inte att radera menyartikeln. Försök igen senare.")
+    } catch (error: any) {
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.error.set("Din inloggningssession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+      } else {
+        this.error.set("Det gick inte att radera menyartikeln. Försök igen senare.")
+      }
 
 
       //Meddelandent nollställs efter 5 sekunder.

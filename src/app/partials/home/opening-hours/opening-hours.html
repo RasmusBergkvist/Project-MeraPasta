@@ -3,7 +3,11 @@
 
     <!-- Felmeddelande-->
     @if(error()) {
-        <p class="error">{{error()}}</p>
+        <p class="error-text">{{error()}}</p>
+    }
+
+    @if(isLoading()) {
+        <p class="loading-text">Öppettider laddas pronto!</p>
     }
 
 

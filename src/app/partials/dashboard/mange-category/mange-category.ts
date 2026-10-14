@@ -82,7 +82,7 @@ export class MangeCategory {
     } catch (error: any) {
       if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.
-        this.errorCreate.set("Din inloggningsession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+        this.errorCreate.set("Din inloggningssession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
       } else if (error.status === 409) {
         this.errorCreate.set("Kategori finns redan!");
         //Om kategori redan finns.
@@ -121,10 +121,13 @@ export class MangeCategory {
       }, 5000);
 
     } catch (error: any) {
-      //Om användaren redan finns.
-      this.errorDelete.set("Det gick inte att radera kategorin. Försök igen senare.")
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.errorDelete.set("Din inloggningssession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
+      } else {
+        this.errorDelete.set("Det gick inte att radera kategorin. Försök igen senare.")
 
-
+      }
       //Meddelandent nollställs efter 5 sekunder.
       setTimeout(() => {
         this.errorDelete.set("")
