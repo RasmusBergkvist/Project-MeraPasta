@@ -44,7 +44,7 @@ export class UserService {
         }
 
 
-        const newUser = this.http.post<void>(this.url + "/register", user, { headers: headers });
+        const newUser = this.http.post<User>(this.url + "/register", user, { headers: headers });
         await firstValueFrom(newUser);
 
         //Anropar loadUser för att hämta den aktuella användarlistan.
@@ -59,7 +59,7 @@ export class UserService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const request = this.http.delete<void>(`${this.url}/${deleteId}`, { headers: headers });
+        const request = this.http.delete<User>(`${this.url}/${deleteId}`, { headers: headers });
         await firstValueFrom(request);
         
         //Filtrerar bort användare som tagits från signal

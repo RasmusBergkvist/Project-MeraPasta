@@ -26,7 +26,7 @@ export class OpeningHoursComponent {
       this.isLoading.set(true);
       await this.openingHoursService.loadOpeningHours();
     } catch (error) {
-      this.error.set("Det gick inget att hämta öppettiderna för tillfället.")
+      this.error.set("Det gick inte att hämta öppettiderna för tillfället.")
     }finally {
        //Döljer laddningsanimation
       this.isLoading.set(false);

@@ -2,9 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.interface';
+import { LoadingDashboard } from '../../partials/dashboard/loading-dashboard/loading-dashboard';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoadingDashboard],
   selector: 'app-users',
   styleUrl: './users.scss',
   templateUrl: './users.html',
@@ -15,6 +16,9 @@ export class Users {
   successCreate = signal<string>("");
   errorDelete = signal<string>("");
   successDelete = signal<string>("");
+
+  //Signal till laddningsanimation
+  isLoading = signal<boolean>(false);
 
   //Hämtar service och router
   userService = inject(UserService);
@@ -60,7 +64,7 @@ export class Users {
       if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.
         this.errorCreate.set("Din inloggningsession har passerat. Vänligen logga in på nytt för att utföra åtgärden!");
-      }else if (error.status === 409) {
+      } else if (error.status === 409) {
         //Om användaren redan finns.
         this.errorCreate.set("Användaren finns redan!");
       } else {
@@ -78,15 +82,22 @@ export class Users {
 
   //vid start
   async ngOnInit() {
-    try{
-    await this.userService.loadUsers();
-   } catch (error: any) {
+    try {
+      //Visar laddningsanimation
+      this.isLoading.set(true);
+
+      //Hämtar användare
+      await this.userService.loadUsers();
+    } catch (error: any) {
       if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.
         this.errorCreate.set("Din inloggningssession har passerat. Vänligen logga in på nytt.");
       } else {
         this.errorCreate.set("Det går inte att hämta användare för tillfället.");
       }
+    } finally {
+      //Döljer laddningsanimation
+      this.isLoading.set(false);
     }
 
 

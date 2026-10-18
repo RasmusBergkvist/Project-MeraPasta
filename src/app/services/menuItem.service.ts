@@ -42,7 +42,7 @@ export class MenuitemService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const newMenuItem = this.http.post<void>(this.urlMenuItems, menuItem, { headers: headers });
+        const newMenuItem = this.http.post<MenuItem>(this.urlMenuItems, menuItem, { headers: headers });
         await firstValueFrom(newMenuItem);
 
         //Uppdaterar kategorin för att ny menyartikel
@@ -58,7 +58,7 @@ export class MenuitemService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const update = this.http.put<void>(`${this.urlMenuItems}/${itemId}`, menuItem, { headers: headers });
+        const update = this.http.put<MenuItem>(`${this.urlMenuItems}/${itemId}`, menuItem, { headers: headers });
         await firstValueFrom(update);
 
          //Uppdaterar kategorin för att uppdaterad menyartikel
@@ -73,7 +73,7 @@ export class MenuitemService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const request = this.http.delete<void>(`${this.urlMenuItems}/${itemId}`, { headers: headers });
+        const request = this.http.delete<MenuItem>(`${this.urlMenuItems}/${itemId}`, { headers: headers });
         await firstValueFrom(request);
 
 

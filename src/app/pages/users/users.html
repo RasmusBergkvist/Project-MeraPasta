@@ -2,7 +2,7 @@
     <h2>Hantera användare</h2>
     <p>Här kan du skapa och radera användare.</p>
 
-        <!-- När användare skapas -->
+    <!-- När användare skapas -->
     @if(successCreate()) {
     <p class="success-text">{{successCreate()}}</p>
     }
@@ -10,7 +10,6 @@
     @if(errorCreate()) {
     <p class="error-text">{{errorCreate()}}</p>
     }
-
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
         <legend>Skapa användare</legend>
@@ -68,6 +67,14 @@
     <p class="error-text">{{errorDelete()}}</p>
     }
 
+    <!-- Laddninsanimation -->
+    @if(isLoading()) {
+    <app-loading-dashboard></app-loading-dashboard>
+    }
+
+    <!-- Här visas alla användarna -->
+
+    @if(!isLoading()) {
     <section class="user-list">
         <h3>Alla användare</h3>
 
@@ -86,5 +93,5 @@
         </ul>
 
     </section>
-
+    }
 </section>

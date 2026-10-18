@@ -59,7 +59,7 @@ export class ReservationService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const update = this.http.put<void>(`${this.url}/${reservationId}`, reservation, { headers: headers });
+        const update = this.http.put<Reservation>(`${this.url}/${reservationId}`, reservation, { headers: headers });
         await firstValueFrom(update);
 
         //Anropar loadReservations för att uppdatera bokningsförfrågningar
@@ -74,7 +74,7 @@ export class ReservationService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const request = this.http.delete<void>(`${this.url}/${reservationId}`, { headers: headers });
+        const request = this.http.delete<Reservation>(`${this.url}/${reservationId}`, { headers: headers });
         await firstValueFrom(request);
 
 

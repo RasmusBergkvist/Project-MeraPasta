@@ -24,7 +24,7 @@ body {
   width: 100%;
   margin: 0 auto;
   padding-top: 80px;
-  
+
 }
 
 
@@ -59,12 +59,13 @@ p {
 
 span,
 li,
-legend, 
+legend,
 textarea {
   font-family: "outfit", sans-serif;
 }
 
-.error-text, .error {
+.error-text,
+.error {
   color: $primary-component-color;
 }
 
@@ -75,5 +76,4 @@ textarea {
 .success-text {
   color: $success-text;
 }
-
 

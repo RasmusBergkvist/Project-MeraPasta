@@ -101,8 +101,14 @@
 
     </div>
 
+    <!-- Laddninsanimation -->
+    @if(isLoading()) {
+    <app-loading-dashboard></app-loading-dashboard>
+    }
+
     <!-- Här visas bokningarna -->
 
+    @if(!isLoading()) {
     <div class="reservation-container">
         @for(res of reserverationService.reservation(); track res.reservation_id ) {
         <article class="reservation-card">
@@ -136,19 +142,19 @@
             <div class="button-container">
                 <button type="button" (click)="getDataToEdit(res)" class="edit-btn"
                     attr.aria-label="Ändra bokningsnummer {{res.reservation_id}}">Ändra</button>
-                <button type="button" (click)="onDelete(res.reservation_id!, res.customer_name)"
-                    class="delete-btn" attr.aria-label="Radera bokningsnummer {{res.reservation_id}}">Radera</button>
+                <button type="button" (click)="onDelete(res.reservation_id!, res.customer_name)" class="delete-btn"
+                    attr.aria-label="Radera bokningsnummer {{res.reservation_id}}">Radera</button>
             </div>
         </article>
 
 
         } @empty{
         @if(!error()) {
-        <p>Det finns inga inkomna bokningsförfrågningar.</p>
+        <p class="empty">Det finns inga inkomna bokningsförfrågningar.</p>
         }
         }
     </div>
-
+    }
 
 
 </section>

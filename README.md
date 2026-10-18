@@ -1,59 +1,32 @@
-# ProjectMeraPasta
+# Mera Pasta
+Detta är ett projektarbete i kursen DT207G Backend-baserad webbuteckling. Projektet går ut på att skapa en webbapplikation till en fiktiv restaurang. Applikationen konsumerar ett REST-API för att hämta, skapa, uppdatera och radera data som lagras i en databas. Användarna kan logga in på ett dashboard för att hantera och redigera innehållet. Webbapplikationen är utvecklad med ramverket Angular och stylad med SCSS.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.14.
+## Teknik
+* Angular
+* TypeScript
+* SCSS
+* CRUD-operationer
+* Dymnamiska sidor och menyer
+* Inloggning med olika roller
+* Interface, services och guards
 
-## Development server
 
-To start a local development server, run:
+## Funktioner för besökare
+* Se restaurangens menyer och öppettider
+* Boka bord via formulär.
+* Läsa om och kontakta restaurangen.
 
-```bash
-ng serve
-```
+## Funktioner för personal
+* Lägga till, ändra och radera mennyartiklar och öppettider.
+* Redigera och radera inkomna bokningsförfrågningar. 
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Funktioner för admin
+* Skapa, uppdatera och radera menykategoierna (ex. varmrätt, pastasallader, dryck).
+* Se alla användarkonton, skapa nya användare och radera användare
+* Kan även utföra samma funktioner som personalen.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Felmeddelande och säkerhet
+* Vid fel visas ett meddelanden för besökare, personal och admin.  
+* Formulär valideras innan data skickas till backend. 
+* Vid inloggning verifieras kontot. Om kontot finns och användaruppgifterna stämmer returneras en token. Denna token skickas sedan med till skyddade routes i CRUD-operationerna.
+* Guards används för att kontrollera om användaren är inloggad samt vilken roll som användaren har. Menyer och innehåll varierar beroende på användarens roll.

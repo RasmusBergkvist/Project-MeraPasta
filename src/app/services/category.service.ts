@@ -3,6 +3,8 @@ import { inject, Service, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Category } from '../models/category.interface';
 import { AuthService } from './auth.service';
+import { MenuitemService } from './menuItem.service';
+
 
 @Service()
 export class CategoryService {
@@ -16,6 +18,8 @@ export class CategoryService {
 
     //Hämtar service
     authService = inject(AuthService);
+    menuitemService = inject(MenuitemService)
+
 
 
 
@@ -41,8 +45,7 @@ export class CategoryService {
         }
 
 
-
-        const newCategory = this.http.post<void>(this.url, category, { headers: headers });
+        const newCategory = this.http.post<Category>(this.url, category, { headers: headers });
         await firstValueFrom(newCategory);
 
         //Anropar loadCategories för att uppdatera kategorier
@@ -56,7 +59,7 @@ export class CategoryService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const update = this.http.put<void>(`${this.url}/${categoryId}`, category, { headers: headers });
+        const update = this.http.put<Category>(`${this.url}/${categoryId}`, category, { headers: headers });
         await firstValueFrom(update);
 
         //Anropar loadCategories för att uppdatera kategorier
@@ -71,9 +74,14 @@ export class CategoryService {
             "Authorization": `Bearer ${this.authService.token()}`
         }
 
-        const request = this.http.delete<void>(`${this.url}/${categoryId}`, { headers: headers });
+        const request = this.http.delete<Category>(`${this.url}/${categoryId}`, { headers: headers });
         await firstValueFrom(request);
-        //Anropar loadCategories för att uppdatera kategorier
-        await this.loadCategories();
+        //Uppdaterar och filtrerar bort kategorin och ariktel från signal
+        this.categories.update(category => category.filter(cat => cat.category_id !== categoryId));
+
+        this.menuitemService.menuItems.update(items => items.filter(item => item.category_id !== categoryId));
+
+  
+
+        }
     }
-}

@@ -7,9 +7,8 @@
     }
 
     @if(isLoading()) {
-        <p class="loading-text">Öppettider laddas pronto!</p>
+        <p class="loading-text">Un momento - Öppettider laddas...</p>
     }
-
 
     <!-- Öppettiderna -->
     <ul class="opening-hours-list">
@@ -26,7 +25,7 @@
 
     } @empty {
         @if(!error()) {
-            <p>Det finns inga öppettider tillgängliga.</p>
+            <p class="empty">Det finns inga öppettider tillgängliga.</p>
         }
     }
      </ul>

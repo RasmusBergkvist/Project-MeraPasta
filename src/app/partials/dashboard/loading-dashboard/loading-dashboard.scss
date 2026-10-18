@@ -1,0 +1,21 @@
+//Laddningstexten
+.loading-text {
+    text-align: center;
+    font-size: 20px;
+    font-style: italic;
+    animation: scale 2s ease-in-out infinite;
+    
+}
+
+//Animationn
+@keyframes scale {
+    0% {
+        scale: 1.15;
+    }
+    50% {
+        scale: 0.9;
+    }
+    100% {
+        scale: 1.15;
+    }
+}

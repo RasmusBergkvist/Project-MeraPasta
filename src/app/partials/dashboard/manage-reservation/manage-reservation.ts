@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReservationService } from '../../../services/reservation.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { firstValueFrom, single } from 'rxjs';
 import { Reservation } from '../../../models/reservation.interface';
+import { LoadingDashboard } from '../loading-dashboard/loading-dashboard';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoadingDashboard],
   selector: 'app-manage-reservation',
   styleUrl: './manage-reservation.scss',
   templateUrl: './manage-reservation.html',
@@ -14,6 +14,9 @@ export class ManageReservation {
   //Signal: Meddelande
   success = signal<string>("");
   error = signal<string>("");
+
+  //Signal till laddningsanimation
+  isLoading = signal<boolean>(false);
 
   //Signal redigering
   editId = signal<number | null>(null);
@@ -111,6 +114,10 @@ export class ManageReservation {
   //vid start
   async ngOnInit() {
     try {
+      //Visar laddningsanimation
+      this.isLoading.set(true);
+
+      //Hämtar bokningsförfrågningar
       await this.reserverationService.loadReservations();
 
     } catch (error: any) {
@@ -120,6 +127,9 @@ export class ManageReservation {
       } else {
         this.error.set("Det går inte att hämta bokningsförfrågningarna för tillfället.");
       }
+    } finally {
+      //Döljer laddningsanimation
+      this.isLoading.set(false);
     }
   }
   //Radera menyartikel

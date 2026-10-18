@@ -64,7 +64,7 @@ export class OpeningHoursService {
         const newOpeningHour = this.http.post<OpeningHours>(this.url, openingHours, { headers: headers });
         await firstValueFrom(newOpeningHour);
 
-        //Anropar loadCategories för att uppdatera kategorier
+        //Anropar loadOpeningHours för att uppdatera kategorier
         await this.loadOpeningHours();
     }
 

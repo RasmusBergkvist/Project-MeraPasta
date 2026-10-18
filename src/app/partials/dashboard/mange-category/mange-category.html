@@ -45,7 +45,15 @@
         <p class="error-text">{{errorDelete()}}</p>
         }
 
+            <!-- Laddninsanimation -->
+    @if(isLoading()) {
+    <app-loading-dashboard></app-loading-dashboard>
+    }
 
+
+        <!-- Här visas menykategorierna  -->
+
+        @if(!isLoading()) {
         <ul>
             @for(category of categoryService.categories(); track category.category_id) {
             <li>
@@ -63,11 +71,13 @@
             <!-- Om inga menyer finns -->
             } @empty {
             @if(!errorDelete()) {
-            <li>Det finns inga sparade menyer.</li>
+            <p class="empty">Det finns inga sparade menyer.</p>
             
             }
             }
         </ul>
+
+    }
     </section>
 
 </section>

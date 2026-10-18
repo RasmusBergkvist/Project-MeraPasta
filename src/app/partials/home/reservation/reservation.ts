@@ -17,7 +17,6 @@ export class ReservationComponent {
   error = signal<string>("");
   success = signal<string>("");
 
-
   //Läser in service
   reservationService = inject(ReservationService);
 

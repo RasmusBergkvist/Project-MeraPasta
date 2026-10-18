@@ -2,9 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/category.interface';
+import { LoadingDashboard } from '../loading-dashboard/loading-dashboard';
+
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoadingDashboard],
   selector: 'app-mange-category',
   styleUrl: './mange-category.scss',
   templateUrl: './mange-category.html',
@@ -19,8 +21,12 @@ export class MangeCategory {
   //Signal redigering
   editId = signal<number | null>(null);
 
+  //Signal till laddningsanimation
+  isLoading = signal<boolean>(false);
+
   //Hämtar service
   categoryService = inject(CategoryService);
+
 
   //Validering
   categoryForm = new FormGroup({
@@ -102,15 +108,36 @@ export class MangeCategory {
 
   //vid start
   async ngOnInit() {
-    await this.categoryService.loadCategories();
+    try {
+      //Visar laddningsanimation
+      this.isLoading.set(true);
 
+      //Laddar kategorier
+      await this.categoryService.loadCategories();
+    } catch (error: any) {
+      if (error.status === 403) {
+        //Om tokens giltigthetstid har passerat.
+        this.errorCreate.set("Din inloggningsession har passerat. Vänligen logga in på nytt.");
+      } else {
+        this.errorCreate.set("Det går inte att hämta menykategorier för tillfället.");
+      }
+    } finally {
+      //Döljer laddningsanimation
+      this.isLoading.set(false);
+    }
   }
 
 
   //Radera kategori
   async onDelete(categoryId: number, categoryName: string): Promise<void> {
+    
+    //Kontrollfråga vid radering av en menykategori
+    if(!confirm(`Vill du radera kategorin ${categoryName}? Alla tillhörande artiklar kommer också att raderas.`)) {
+      return;
+    }
     try {
       await this.categoryService.deleteCategory(categoryId);
+
 
       //Meddelande vid radering
       this.successDelete.set(`Kategorin har raderats: ${categoryName}`);
@@ -119,6 +146,7 @@ export class MangeCategory {
       setTimeout(() => {
         this.successDelete.set("")
       }, 5000);
+
 
     } catch (error: any) {
       if (error.status === 403) {

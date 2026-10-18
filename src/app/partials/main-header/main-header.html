@@ -13,7 +13,7 @@
         }
         </button>
         <!-- Meny ändras beroende på inloggning och roll -->
-        <nav [class.is-open]=" isMenuOpen()" (click)="closeMenu()">
+        <nav [class.is-open]="isMenuOpen()" (click)="closeMenu()">
             <ul>
                 @if(!authService.isLoggedIn()){
                 <li><a routerLink="/" fragment="menu">MENY</a></li>

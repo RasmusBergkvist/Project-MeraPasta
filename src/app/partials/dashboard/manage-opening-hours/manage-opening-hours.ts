@@ -2,9 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { OpeningHoursService } from '../../../services/openinghours.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OpeningHours } from '../../../models/openinghours.interface';
+import { LoadingDashboard } from '../loading-dashboard/loading-dashboard';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoadingDashboard],
   selector: 'app-manage-opening-hours',
   styleUrl: './manage-opening-hours.scss',
   templateUrl: './manage-opening-hours.html',
@@ -14,6 +15,9 @@ export class ManageOpeningHours {
   //Signals: Meddelanden
   success = signal<string>("");
   error = signal<string>("");
+
+  //Signal till laddningsanimation
+  isLoading = signal<boolean>(false);
 
   //Signal: redigering
   editId = signal<number | null>(null);
@@ -78,7 +82,7 @@ export class ManageOpeningHours {
       } else {
 
         //Lägger till öppettid
-       await this.openingHoursService.createOpeningHour(openingHoursInput);
+        await this.openingHoursService.createOpeningHour(openingHoursInput);
 
         //Meddelande när öppettid lagt till.
         this.success.set(`Öppettid har lagts till för: ${openingHoursInput.day_of_week}`)
@@ -111,6 +115,10 @@ export class ManageOpeningHours {
   //Vid start
   async ngOnInit() {
     try {
+      //Visar laddningsanimation
+      this.isLoading.set(true);
+
+      //Hämtar öppettider
       await this.openingHoursService.loadOpeningHours();
     } catch (error: any) {
       if (error.status === 403) {
@@ -119,11 +127,14 @@ export class ManageOpeningHours {
       } else {
         this.error.set("Det går inte att hämta öppetiderna för tillfället.");
       }
+    } finally {
+      //Döljer laddningsanimation
+      this.isLoading.set(false);
     }
   }
 
 
-    //Radera menyartikel
+  //Radera menyartikel
   async onDelete(openId: number, day_of_week: string): Promise<void> {
     try {
 
@@ -142,8 +153,8 @@ export class ManageOpeningHours {
         this.success.set("")
       }, 5000);
 
-    } catch (error:any) {
-            if (error.status === 403) {
+    } catch (error: any) {
+      if (error.status === 403) {
         //Om tokens giltigthetstid har passerat.
         this.error.set("Din inloggningssession har passerat. Vänligen logga in på nytt.");
       } else {

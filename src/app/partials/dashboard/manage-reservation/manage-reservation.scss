@@ -152,7 +152,16 @@
                 }
             }
         }
+
+
     }
+
+    .empty {
+        grid-column: 1/-1; // Tar upp hela raden
+        text-align: center;
+        margin: 0 auto;
+    }
+
 }
 
 

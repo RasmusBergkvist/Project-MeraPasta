@@ -12,8 +12,14 @@
     <p class="error">{{error()}}</p>
     }
 
+    <!-- Laddninsanimation -->
+    @if(isLoading()) {
+    <app-loading-dashboard></app-loading-dashboard>
+    }
 
 
+    <!-- Här visas öppettiderna  -->
+    @if(!isLoading()) {
     <ul class="opening-hours-list">
 
         @for(hour of openingHoursService.openingHours(); track hour.open_id) {
@@ -37,11 +43,11 @@
 
         } @empty {
         @if(!error()) {
-        <p>Det finns inga öppettider tillgängliga.</p>
+        <p class="empty">Det finns inga öppettider tillgängliga.</p>
         }
         }
     </ul>
-
+    }
     <!-- Formulär: Skapa eller uppdatera öppettider-->
     <form [formGroup]="hourForm" (ngSubmit)="onSubmit()" class="hour-form">
 
@@ -76,7 +82,8 @@
         }
 
         <!-- Knapp ändras beroende om kategori ska ändras eller skapas -->
-        <button type="submit" class="hour-btn" [disabled]="hourForm.invalid">{{editId() ? "Ändra" : "Lägg till" }}</button>
+        <button type="submit" class="hour-btn" [disabled]="hourForm.invalid">{{editId() ? "Ändra" : "Lägg till"
+            }}</button>
     </form>
 
 </section>
