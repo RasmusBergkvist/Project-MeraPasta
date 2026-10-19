@@ -48,10 +48,10 @@
 
     }
 
-     .loading-text {
-            font-style: italic;
-            font-size: 20px;
-        }
+    .loading-text {
+        font-style: italic;
+        font-size: 20px;
+    }
 
 }
 
@@ -178,11 +178,12 @@ form {
 
     ul {
         display: flex;
-        gap: 100px;
+        gap: 80px;
 
         @media(max-width: 768px) {
             gap: 30px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
 
@@ -192,19 +193,22 @@ form {
             a {
                 color: $secondary-component-color;
                 font-size: 24px;
+                padding: 10px 14px;
+                border-radius: 12px;
                 cursor: pointer;
                 transition: color 0.2s ease;
 
                 &.active {
-                    font-weight: 600;
-                    color: $primary-component-color;
+                    background-color: $primary-component-color;
+                    color: $light-text;
 
 
                 }
 
 
                 &:hover {
-                    text-decoration: underline;
+                    background-color: $darker-primary-component-color;
+                    color: $light-text;
 
                 }
             }
@@ -216,7 +220,7 @@ form {
         display: block;
         width: min(800px, 80vw);
         height: 1.5px;
-        margin: 5px auto;
+        margin: 1rem auto;
         border-radius: 1px;
         background-color: $secondary-component-color;
     }
@@ -236,7 +240,9 @@ form {
     max-width: 900px;
     width: 100%;
 
-    .menu-empty, .success-text, .error-text {
+    .menu-empty,
+    .success-text,
+    .error-text {
         grid-column: 1/-1; //Tar upp hela raden.
         margin: 0 auto;
         text-align: center;
