@@ -2,7 +2,7 @@
 Detta är ett projektarbete i kursen DT207G Backend-baserad webbvuteckling. Projektet går ut på att skapa en webbapplikation till en fiktiv restaurang. Applikationen konsumerar ett REST-API för att hämta, skapa, uppdatera och radera data som lagras i en databas. Användarna kan logga in på ett dashboard för att hantera och redigera innehållet. Webbapplikationen är utvecklad med ramverket Angular och stylad med SCSS.
 
 ## URL till webbapplikation
-
+https://project-merapasta.netlify.app/
 
 ## Teknik
 * Angular
