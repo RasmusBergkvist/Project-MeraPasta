@@ -76,7 +76,8 @@
         </label>
 
 
-        <button type="submit" class="menu-btn" [disabled]="menuForm.invalid">Lägg till</button>
+        <button type="submit" class="menu-btn" [disabled]="menuForm.invalid">{{editId() ? "Ändra" : "Lägg till"
+            }}</button>
     </form>
 
     }
@@ -126,7 +127,7 @@
             </div>
             <!-- Om det finns en beskrivning till artikeln -->
             @if(item.item_description) {
-            <p class="item-description">{{item.item_description}}.</p>
+            <p class="item-description">{{item.item_description}}</p>
             }
 
             <!-- Knapparna visas endast via Dashboard -->

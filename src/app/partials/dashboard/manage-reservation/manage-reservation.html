@@ -13,7 +13,7 @@
 
 
     <!-- Visas bara vid redigering -->
-    <div class="edit-form" [class.visible]="editId() !== null" [class.hidden]="editId() === null">
+    <div class="edit-form" [class.visible]="editId() !== null">
 
         <!-- Formulär vid redigera bokning-->
         <form [formGroup]="editReservationForm" (ngSubmit)="onSubmit()">

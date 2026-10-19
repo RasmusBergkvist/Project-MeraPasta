@@ -150,11 +150,11 @@ form {
 
     .menu-btn {
         @include component-button;
-        background-color: $primary-component-color;
+        background-color: $accent-component-color;
         color: $light-text;
 
         &:hover {
-            background-color: $darker-primary-component-color;
+            background-color: $darker-accent-component-color;
         }
 
         &:disabled {
@@ -236,7 +236,7 @@ form {
     max-width: 900px;
     width: 100%;
 
-    .menu-empty {
+    .menu-empty, .success-text, .error-text {
         grid-column: 1/-1; //Tar upp hela raden.
         margin: 0 auto;
         text-align: center;

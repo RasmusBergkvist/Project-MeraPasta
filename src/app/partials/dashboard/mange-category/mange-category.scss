@@ -91,10 +91,11 @@ form {
 
     .category-btn {
         @include component-button;
+        background-color: $accent-component-color;
         color: $light-text;
 
         &:hover {
-            background-color: $darker-primary-component-color;
+            background-color: $darker-accent-component-color;
         }
 
         &:disabled {

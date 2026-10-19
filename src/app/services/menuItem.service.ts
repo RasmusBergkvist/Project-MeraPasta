@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 
 @Service()
 export class MenuitemService {
-    private urlMenuItems: string = "http://localhost:3000/api/menuitems"
-    private urlMenuCategory: string = "http://localhost:3000/api/menuitems/category"
+    private urlMenuItems: string = "https://project-merapasta-api.onrender.com/api/menuitems"
+    private urlMenuCategory: string = "https://project-merapasta-api.onrender.com/api/menuitems/category"
 
     http = inject(HttpClient);
 

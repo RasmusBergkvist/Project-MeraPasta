@@ -8,7 +8,7 @@ import { MenuitemService } from './menuItem.service';
 
 @Service()
 export class CategoryService {
-    private url: string = "http://localhost:3000/api/categories"
+    private url: string = "https://project-merapasta-api.onrender.com/api/categories"
 
     http = inject(HttpClient);
 

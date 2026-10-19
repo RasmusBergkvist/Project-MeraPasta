@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 @Service()
 export class ReservationService {
-    private url = "http://localhost:3000/api/reservations";
+    private url = "https://project-merapasta-api.onrender.com/api/reservations";
 
     http = inject(HttpClient);
 

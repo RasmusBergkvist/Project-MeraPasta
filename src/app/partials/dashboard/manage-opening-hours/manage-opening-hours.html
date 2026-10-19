@@ -1,6 +1,6 @@
 <section id="manage-opening-hours" class="manage-opening-hours">
     <h2>Hantera öppettider</h2>
-    <p>Här kan du lägga till, ändra och radera öppettiderna.</p>
+    <p>Här kan du lägga till, ändra och radera öppettiderna. Vid stängt lämnas fälten för öppnings- och stängningstid tomma.</p>
 
 
     <!-- När öppettid skapas eller uppdateras-->
@@ -65,11 +65,11 @@
         </label>
 
         <div class="time-container">
-            <label for="open-time">Öppningstid
+            <label for="open-time">Öppnar
                 <input type="time" id="open-time" formControlName="open_time">
             </label>
 
-            <label for="close-time">Stäningstid
+            <label for="close-time">Stänger
                 <input type="time" id="open-time" formControlName="close_time">
             </label>
         </div>
@@ -78,7 +78,7 @@
         @if((hourForm.controls['open_time'].value && !hourForm.controls['close_time'].value) ||
         (!hourForm.controls['open_time'].value && hourForm.controls['close_time'].value))
         {
-        <p class="error">Fyll i både öppnings- och stängningstid. Vid stäng lämnas både fälten tomma. </p>
+        <p class="error">Fyll i både öppnings- och stängningstid. Vid stängt lämnas både fälten tomma. </p>
         }
 
         <!-- Knapp ändras beroende om kategori ska ändras eller skapas -->

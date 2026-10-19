@@ -12,7 +12,7 @@
     <p class="error-text">{{error()}}</p>
     }
 
-    <!-- FOMRMULÄR TILL BOKNINGSFÖRFRÅGAN -->
+    <!-- Formulär till bokningsförfrågan -->
     <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
         <label for="name">
             <input type="text" id="name" formControlName="customer_name">

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Service()
 export class AuthService {
-    private url: string = "http://localhost:3000/api/users"
+    private url: string = "https://project-merapasta-api.onrender.com/api/users"
     http = inject(HttpClient);
     router = inject(Router);
 

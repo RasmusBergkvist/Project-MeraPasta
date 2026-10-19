@@ -14,7 +14,7 @@
     gap: 12px;
 
 
-    h2 {
+    h2, p {
         text-align: center;
 
     }
@@ -169,10 +169,11 @@ form {
 
     .hour-btn {
         @include component-button;
+        background-color: $accent-component-color;
         color: $light-text;
 
         &:hover {
-            background-color: $darker-primary-component-color;
+            background-color: $darker-accent-component-color;
         }
 
         &:disabled {
